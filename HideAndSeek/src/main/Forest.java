@@ -18,13 +18,16 @@ public class Forest {
 	
 	public Forest(String fileName) throws FileNotFoundException{
 		Scanner input = new Scanner(new File(fileName));
-		//First integer is number of friends and dimensions of forest
+		//First integer of input is number of friends and dimensions of forest
 		numberOfFriends = dimension = input.nextInt();
-		forestGrid = new Space[dimension][dimension];
+		//Second integer of input is number of trees in forest
+		numberOfTrees = input.nextInt();
+		
+		//Outputs number of friends and trees and the size of the forest
 		System.out.println("Number of friends: " + numberOfFriends);
 		System.out.println("Dimensions: " + dimension + " x " + dimension);
-		numberOfTrees = input.nextInt();
 		System.out.println("Number of trees: "+ numberOfTrees);
+		
 		initializeForest(input);
 	}
 	
@@ -37,6 +40,7 @@ public class Forest {
 	 * @param input Reads in input file.
 	 */
 	private void initializeForest(Scanner input){
+		forestGrid = new Space[dimension][dimension];
 		markAllSpacesEmpty();
 		markTreeSpaces(input);
 		randomlyPlaceFriends();
@@ -77,7 +81,7 @@ public class Forest {
 		for(int i = 0; i < numberOfFriends; i++){
 			int columnNumber = i;
 			int rowNumber = -1;
-			//Generate random column and row numbers until an empty space is selected
+			//Generate row numbers until an empty space is selected
 			while(rowNumber < 0 
 					|| !forestGrid[columnNumber][rowNumber].isOpen()){
 				rowNumber = (int) (Math.random() * dimension - 1);
