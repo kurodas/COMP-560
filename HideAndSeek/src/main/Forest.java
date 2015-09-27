@@ -6,8 +6,8 @@ import java.util.Scanner;
 /**
  * Forest is represented as 2-D array of chars
  * ' ' represents empty space
- * 't' represents tree space
- * 'f' represents friend space
+ * 'T' represents tree space
+ * 'F' represents friend space
  * @author skuroda
  *
  */
@@ -74,16 +74,16 @@ public class Forest {
 		}
 	}
 	/**
-	 * Randomly places friends in empty spaces.
+	 * Places friends in random empty spaces.
+	 * One friend per column
 	 */
 	private void randomlyPlaceFriends(){
 		for(int i = 0; i < numberOfFriends; i++){
-			int columnNumber = -1;
+			int columnNumber = i;
 			int rowNumber = -1;
 			//Generate random column and row numbers until an empty space is selected
-			while(columnNumber < 0 || rowNumber < 0 
+			while(rowNumber < 0 
 					|| !isOpen(columnNumber, rowNumber)){
-				columnNumber = (int) (Math.random() * dimension - 1);
 				rowNumber = (int) (Math.random() * dimension - 1);
 			}
 			forestGrid[columnNumber][rowNumber] = 'F';
