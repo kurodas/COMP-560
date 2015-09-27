@@ -2,38 +2,39 @@ package main;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.Scanner;
 /**
- * Forest is represented as 2-D array of chars
- * ' ' represents empty space
- * 'T' represents tree space
- * 'F' represents friend space
+ * Forest is represented as 2-D Space array
  * @author skuroda
  *
  */
 public class Forest {
 	
 	int numberOfFriends, dimension, numberOfTrees;
-	char[][] forestGrid;
+	Space[][] forestGrid;
+	ArrayList<Space> treeLocations = new ArrayList<Space>();
+	ArrayList<Space> friendLocations = new ArrayList<Space>();
 	
 	public Forest(String fileName) throws FileNotFoundException{
 		Scanner input = new Scanner(new File(fileName));
 		//First integer is number of friends and dimensions of forest
 		numberOfFriends = dimension = input.nextInt();
-		forestGrid = new char[dimension][dimension];
+		forestGrid = new Space[dimension][dimension];
 		System.out.println("Number of friends: " + numberOfFriends);
 		System.out.println("Dimensions: " + dimension + " x " + dimension);
 		numberOfTrees = input.nextInt();
 		System.out.println("Number of trees: "+ numberOfTrees);
 		initializeForest(input);
 	}
+	
 	/**
 	 * Initializes the forest grid
 	 * 1. Marks all spaces as empty
 	 * 2. Marks locations of trees
 	 * 3. Randomly places friends
 	 * 4. Prints out forest grid
-	 * @param input
+	 * @param input Reads in input file.
 	 */
 	private void initializeForest(Scanner input){
 		markAllSpacesEmpty();
@@ -41,41 +42,36 @@ public class Forest {
 		randomlyPlaceFriends();
 		printForestGrid();
 	}
-	/**
-	 * Test to see if the space is open
-	 * @param columnNumber
-	 * @param rowNumber
-	 * @return true if space is not occupied by tree or friend
-	 *         false otherwise
-	 */
-	private boolean isOpen(int columnNumber, int rowNumber){
-		return forestGrid[columnNumber][rowNumber] == ' ';	
-	}
 	
 	/**
 	 * Initializes all spaces to empty value ' '
 	 */
 	private void markAllSpacesEmpty(){
-		for (int y = 0; y < dimension; y++) {
-			for (int x = 0; x < dimension; x++) {
-				forestGrid[y][x] = ' ';
+		for (int rowNumber = 0; rowNumber < dimension; rowNumber++) {
+			for (int columnNumber = 0; columnNumber < dimension; columnNumber++) {
+				forestGrid[rowNumber][columnNumber] = new Space(rowNumber, columnNumber, ' ');
 			}
 		}
 	}
+	
 	/**
 	 * Marks tree spaces with 't'
+	 * Stores spaces in treeLocations ArrayList
 	 * @param input Reads in input file.
 	 */
 	private void markTreeSpaces(Scanner input){
 		for(int i = 0; i < numberOfTrees; i++){
-			int treeRowNumber = input.nextInt() - 1;
-			int treeColumnNumber = input.nextInt() - 1;
-			forestGrid[treeRowNumber][treeColumnNumber] = 'T';
+			int rowNumber = input.nextInt() - 1;
+			int columnNumber = input.nextInt() - 1;
+			forestGrid[rowNumber][columnNumber].setValue('T');
+			treeLocations.add(forestGrid[rowNumber][columnNumber]);
 		}
 	}
+	
 	/**
 	 * Places friends in random empty spaces.
-	 * One friend per column
+	 * One friend per column.
+	 * Stores spaces in friendLocations ArrayList
 	 */
 	private void randomlyPlaceFriends(){
 		for(int i = 0; i < numberOfFriends; i++){
@@ -83,10 +79,11 @@ public class Forest {
 			int rowNumber = -1;
 			//Generate random column and row numbers until an empty space is selected
 			while(rowNumber < 0 
-					|| !isOpen(columnNumber, rowNumber)){
+					|| !forestGrid[columnNumber][rowNumber].isOpen()){
 				rowNumber = (int) (Math.random() * dimension - 1);
 			}
-			forestGrid[columnNumber][rowNumber] = 'F';
+			forestGrid[columnNumber][rowNumber].setValue('F');
+			friendLocations.add(forestGrid[rowNumber][columnNumber]);
 		}
 	}
 	
@@ -101,7 +98,7 @@ public class Forest {
 		for(int y = 0; y < dimension; y++){
 			System.out.print("*");
 			for(int x = 0; x < dimension; x++){
-				System.out.print(forestGrid[y][x]);
+				System.out.print(forestGrid[y][x].getValue());
 			}
 			System.out.println("*");
 		}
