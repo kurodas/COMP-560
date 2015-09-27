@@ -59,7 +59,7 @@ public class Forest {
 	}
 	
 	/**
-	 * Marks tree spaces with 't'
+	 * Marks tree spaces with 'T'
 	 * Stores spaces in treeLocations ArrayList
 	 * @param input Reads in input file.
 	 */
@@ -73,6 +73,7 @@ public class Forest {
 	}
 	
 	/**
+	 * Marks friend spaces with 'F'
 	 * Places friends in random empty spaces.
 	 * One friend per column.
 	 * Stores spaces in friendLocations ArrayList
