@@ -9,14 +9,109 @@ package main;
  *
  */
 public class Space {
-	int rowNumber, columnNumber;
+	private int rowNumber, columnNumber, conflictCount;
 	char value;
+	Forest forest;
+	public enum Direction{upLeft, up, upRight, right, downRight, down, downLeft, left}
 	
-	public Space(int row, int column, char val){
+	public Space(int row, int column, char val, Forest f){
 		rowNumber = row;
 		columnNumber = column;
 		if(val == ' ' || val == 'T' || val == 'F')
 			value = val;
+		forest = f;
+	}
+	
+	public int getConflictCount(){
+		//Reset conflictCount
+		conflictCount = 0;
+		//Check each direction
+		for(Direction d: Direction.values()){
+			//If a conflict is found, increment conflictCount
+			if(conflictsInDirection(d))
+				conflictCount++;
+		}
+		return conflictCount;
+	}
+	
+	private boolean conflictsInDirection(Direction d){
+		//If there is a tree in this space, there are no conflicts in direction d
+		if (hasTree()) {
+			return false;
+		} else {
+			//Check to see if the current space is the 
+			//last possible space in direction d
+			//If so, return false
+			//else, set nextSpace to be the space in direction d from this space
+			Space nextSpace = null;
+			switch (d) {
+			case upLeft:
+				if (rowNumber == 0 || columnNumber == 0)
+					return false;
+				else{
+					nextSpace = forest.getSpace(rowNumber - 1, columnNumber - 1);
+					break;
+				}
+			case up:
+				if (rowNumber == 0)
+					return false;
+				else{
+					nextSpace = forest.getSpace(rowNumber - 1, columnNumber);
+					break;
+				}
+			case upRight:
+				if (rowNumber == 0 || columnNumber == forest.getDimension() - 1)
+					return false;
+				else{
+					nextSpace = forest.getSpace(rowNumber - 1, columnNumber + 1);
+					break;
+				}
+			case right:
+				if (columnNumber == forest.getDimension() - 1)
+					return false;
+				else{
+					nextSpace = forest.getSpace(rowNumber, columnNumber + 1);
+					break;
+				}
+			case downRight:
+				if (rowNumber == forest.getDimension() - 1
+						|| columnNumber == forest.getDimension() - 1)
+					return false;
+				else{
+					nextSpace = forest.getSpace(rowNumber + 1, columnNumber + 1);
+					break;
+				}
+			case down:
+				if (rowNumber == forest.getDimension() - 1)
+					return false;
+				else{
+					nextSpace = forest.getSpace(rowNumber + 1, columnNumber);
+					break;
+				}
+			case downLeft:
+				if (rowNumber == forest.getDimension() - 1 || columnNumber == 0)
+					return false;
+				else {
+					nextSpace = forest.getSpace(rowNumber + 1, columnNumber - 1);
+					break;
+				}
+			case left:
+				if (columnNumber == 0)
+					return false;
+				else {
+					nextSpace = forest.getSpace(rowNumber, columnNumber - 1);
+					break;
+				}
+			}
+			//Check if nextSpace has a friend, then a conflict is found
+			if(nextSpace.hasFriend())
+				return true;
+			//Else recursively check nextSpace for conflicts
+			else
+				return nextSpace.conflictsInDirection(d);
+			
+		}
+		
 	}
 	
 	/**
