@@ -52,6 +52,8 @@ public class Space {
 					nextSpace = forest.getSpace(rowNumber - 1, columnNumber - 1);
 					break;
 				}
+			//Technically unnecessary case because only one 
+			//friend will ever be in each column.
 			case up:
 				if (rowNumber == 0)
 					return false;
@@ -81,6 +83,8 @@ public class Space {
 					nextSpace = forest.getSpace(rowNumber + 1, columnNumber + 1);
 					break;
 				}
+			//Technically unnecessary case because only one 
+			//friend will ever be in each column.
 			case down:
 				if (rowNumber == forest.getDimension() - 1)
 					return false;
