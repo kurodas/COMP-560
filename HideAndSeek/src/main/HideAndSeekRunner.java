@@ -10,10 +10,14 @@ public class HideAndSeekRunner {
 	 */
 	public static void main(String args[]) throws FileNotFoundException{
 		Forest forest = new Forest(args[0]);
-		System.out.print("For friend in column " 
-				+ forest.getFriendLocations().get(0).getColumnNumber());
-		System.out.print(" row " + forest.getFriendLocations().get(0).getRowNumber());
-		System.out.print(", there are " + forest.getFriendLocations().get(0).getConflictCount());
-		System.out.println(" conflicts.");
+		for (int i = 0; i < forest.getDimension(); i++) {
+			System.out.print("For friend in column "
+					+ forest.getFriendLocations().get(i).getColumnNumber());
+			System.out.print(" row "
+					+ forest.getFriendLocations().get(i).getRowNumber());
+			System.out.print(", there are "
+					+ forest.getFriendLocations().get(i).getConflictCount());
+			System.out.println(" conflicts.");
+		}
 	}
 }
