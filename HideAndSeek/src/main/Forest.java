@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import main.Space.SpaceValue;
 /**
  * Forest is represented as 2-D Space array
  * @author skuroda
@@ -45,6 +47,10 @@ public class Forest {
 		markTreeSpaces(input);
 		randomlyPlaceFriends();
 		printForestGrid();
+		//Calculate initial conflicts count for each friend
+		for(int i = 0; i < dimension; i++){
+			friendLocations.get(i).getConflictCount(true);
+		}
 	}
 	
 	/**
@@ -53,7 +59,7 @@ public class Forest {
 	private void markAllSpacesEmpty(){
 		for (int rowNumber = 0; rowNumber < dimension; rowNumber++) {
 			for (int columnNumber = 0; columnNumber < dimension; columnNumber++) {
-				forestGrid[rowNumber][columnNumber] = new Space(rowNumber, columnNumber, ' ', this);
+				forestGrid[rowNumber][columnNumber] = new Space(rowNumber, columnNumber, SpaceValue.OPEN, this);
 			}
 		}
 	}
@@ -67,7 +73,7 @@ public class Forest {
 		for(int i = 0; i < numberOfTrees; i++){
 			int rowNumber = input.nextInt() - 1;
 			int columnNumber = input.nextInt() - 1;
-			forestGrid[rowNumber][columnNumber].setValue('T');
+			forestGrid[rowNumber][columnNumber].setValue(SpaceValue.TREE);
 			treeLocations.add(forestGrid[rowNumber][columnNumber]);
 		}
 	}
@@ -87,7 +93,7 @@ public class Forest {
 					|| !forestGrid[rowNumber][columnNumber].isOpen()){
 				rowNumber = (int) (Math.random() * dimension - 1);
 			}
-			forestGrid[rowNumber][columnNumber].setValue('F');
+			forestGrid[rowNumber][columnNumber].setValue(SpaceValue.FRIEND);
 			friendLocations.add(forestGrid[rowNumber][columnNumber]);
 		}
 	}
@@ -103,7 +109,7 @@ public class Forest {
 		for(int y = 0; y < dimension; y++){
 			System.out.print("*");
 			for(int x = 0; x < dimension; x++){
-				System.out.print(forestGrid[y][x].getValue());
+				System.out.print(forestGrid[y][x].getPrintValue());
 			}
 			System.out.println("*");
 		}

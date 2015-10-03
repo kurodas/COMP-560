@@ -16,7 +16,17 @@ public class HideAndSeekRunner {
 			System.out.print(" row "
 					+ forest.getFriendLocations().get(i).getRowNumber());
 			System.out.print(", there are "
-					+ forest.getFriendLocations().get(i).getConflictCount());
+					+ forest.getFriendLocations().get(i).getConflictCount(false));
+			System.out.println(" conflicts.");
+		}
+		LocalSearch search = new LocalSearch(forest);
+		for (int i = 0; i < forest.getDimension(); i++) {
+			System.out.print("For friend in column "
+					+ forest.getFriendLocations().get(i).getColumnNumber());
+			System.out.print(" row "
+					+ forest.getFriendLocations().get(i).getRowNumber());
+			System.out.print(", there are "
+					+ forest.getFriendLocations().get(i).getConflictCount(false));
 			System.out.println(" conflicts.");
 		}
 	}
