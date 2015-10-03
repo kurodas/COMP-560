@@ -10,7 +10,7 @@ package main;
  */
 public class Space {
 	public enum Direction{UPLEFT, UP, UPRIGHT, RIGHT, DOWNRIGHT, DOWN, DOWNLEFT, LEFT}
-	public enum SpaceValue{OPEN, FRIEND, TREE};
+	public enum SpaceValue{EMPTY, FRIEND, TREE};
 	
 	private int rowNumber, columnNumber, conflictCount;
 	SpaceValue value;
@@ -171,8 +171,8 @@ public class Space {
 	}
 	
 	//Returns true if this space is empty
-	public boolean isOpen(){
-		return value == SpaceValue.OPEN;
+	public boolean isEmpty(){
+		return value == SpaceValue.EMPTY;
 	}
 	
 	//Returns true if this space has a tree
@@ -185,10 +185,12 @@ public class Space {
 		return value == SpaceValue.FRIEND;
 	}
 	
+	//Returns char value corresponding to space's value 
+	//for printing forest grid 
 	public char getPrintValue(){
 		if(value == SpaceValue.TREE)
 			return 'T';
-		else if(value == SpaceValue.OPEN)
+		else if(value == SpaceValue.EMPTY)
 			return ' ';
 		else
 			return 'F';
