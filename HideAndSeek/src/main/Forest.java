@@ -51,6 +51,9 @@ public class Forest {
 		for(int i = 0; i < dimension; i++){
 			friendLocations.get(i).getConflictCount(true);
 		}
+		for(Space f: friendLocations){
+			System.out.println((f.getRowNumber() + 1) + " " + (f.getColumnNumber() + 1));
+		}
 	}
 	
 	/**

@@ -25,11 +25,12 @@ public class Space {
 	}
 	
 	/**
-	 * Returns the conflict count for this space Recalculates depending on
-	 * parameter value
+	 * Returns the conflict count for this space. 
+	 * Recalculates depending on parameter value.
 	 * 
 	 * @param recalculate
-	 *            if true, recalculate conflictCount before returning
+	 *            true:  return recalculated conflictCount
+	 *            false: return conflictCount without recalculating
 	 * @return conflictCount
 	 */
 	public int getConflictCount(boolean recalculate){

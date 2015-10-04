@@ -6,6 +6,10 @@ public class HideAndSeekRunner {
 	/**
 	 * 
 	 * @param args [0] = Filename of input file 
+	 * 			args[1] = Assignment order: 
+	 * 						O = left-to-right
+	 * 						M = most-conflicted
+	 * 						R = random 
 	 * @throws FileNotFoundException
 	 */
 	public static void main(String args[]) throws FileNotFoundException{
@@ -21,7 +25,7 @@ public class HideAndSeekRunner {
 //			System.out.println(" conflicts.");
 //		}
 		System.out.println();
-		LocalSearch search = new LocalSearch(forest);
+		LocalSearch search = new LocalSearch(forest, args[1]);
 		forest.printForestGrid();
 //		for (int i = 0; i < forest.getDimension(); i++) {
 //			System.out.print("For friend in column "
@@ -33,7 +37,7 @@ public class HideAndSeekRunner {
 //			System.out.println(" conflicts.");
 //		}
 		for(Space f:forest.getFriendLocations()){
-			System.out.println(f.getRowNumber() + " " + f.getColumnNumber());
+			System.out.println((f.getRowNumber() + 1) + " " + (f.getColumnNumber() + 1));
 		}
 	}
 }
