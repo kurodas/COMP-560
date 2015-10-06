@@ -1,7 +1,7 @@
 package main;
 
 public class Cell {
-	enum colors {GREEN, BLUE};
+	enum colors {GREEN, BLUE, BLANK};
 	public int value;
 	public colors color;
 	
