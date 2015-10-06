@@ -1,15 +1,12 @@
 package main;
 
-import main.Cell.colors;
-
-
-public class Minimax {
+public class Minimax implements Strategy {
 	
-	private Cell.colors playerColor;
+	public Cell.colors playerColor;
 	private int maxDepth;
-	private Cell.colors opponentColor;
+	public Cell.colors opponentColor;
 	
-	public Move MiniMax(Board board, int maxDepth, Cell.colors playerColor){
+	public Move move(Board board, int maxDepth, Cell.colors playerColor){
 		this.playerColor = playerColor;
 		this.opponentColor = playerColor == Cell.colors.BLUE ? Cell.colors.GREEN : Cell.colors.BLUE;
 		this.maxDepth = maxDepth;
@@ -29,6 +26,9 @@ public class Minimax {
 					}
 				}
 			}
+		}
+		if(bestX < 0){
+			System.out.println("HI");
 		}
 		Move m = new Move(bestX,bestY);
 		return m;
@@ -111,7 +111,34 @@ public class Minimax {
 		return score;
 	}
 	
-	private int winLoseCheck(Board b){
+	private int heuristicEval2(Board board) {
+		int score = 0;
+		score += board.getScoreForSpace(0, 0, playerColor) * 2;
+		score += board.getScoreForSpace(0, 5, playerColor) * 2;
+		score += board.getScoreForSpace(5, 0, playerColor) * 2;
+		score += board.getScoreForSpace(5, 5, playerColor) * 2;
+		for(int i = 1; i<5; i++){
+			score += Math.round(board.getScoreForSpace(i, 0, playerColor) * 5 / 3);
+			score += Math.round(board.getScoreForSpace(i, 5, playerColor) * 5 / 3);
+			score += Math.round(board.getScoreForSpace(0, i, playerColor) * 5 / 3);
+			score += Math.round(board.getScoreForSpace(5, i, playerColor) * 5 / 3);
+		}
+		for(int i = 2; i<4; i++){
+			score += Math.round(board.getScoreForSpace(i, 1, playerColor) * 4 / 3);
+			score += Math.round(board.getScoreForSpace(i, 4, playerColor) * 4 / 3);
+			score += Math.round(board.getScoreForSpace(1, i, playerColor) * 4 / 3);
+			score += Math.round(board.getScoreForSpace(4, i, playerColor) * 4 / 3);
+		}
+		
+		score += board.getScoreForSpace(2, 2, playerColor);
+		score += board.getScoreForSpace(2, 3, playerColor);
+		score += board.getScoreForSpace(3, 2, playerColor);
+		score += board.getScoreForSpace(3, 3, playerColor);
+		return score;
+		
+	}
+	
+	public int winLoseCheck(Board b){
 		int sum = 0;
 		for(int x = 0; x < 6; x++){
 			for(int y = 0; y < 6; y++){
@@ -125,13 +152,13 @@ public class Minimax {
 			}
 		}
 		if(sum > 0){
-			return Integer.MAX_VALUE;//maximum possible utility, victory
+			return Integer.MAX_VALUE - 1;//maximum possible utility, victory
 		}
 		else if(sum == 0){
 			return 0;//draw
 		}
 		else{
-			return Integer.MIN_VALUE;//minimum possible utility, failure
+			return Integer.MIN_VALUE + 1;//minimum possible utility (less than minimum though), failure
 		}
 		
 	}

@@ -26,6 +26,7 @@ public class Board {
 				board[row][column] = new Cell(input.nextInt(), colors.BLANK);
 			}
 		}
+		input.close();
 	}
 	
 	public Cell getCell(int row, int column){
@@ -43,11 +44,15 @@ public class Board {
 	}
 	
 	public void play(int x, int y, Cell.colors playerColor){
+		if(x<0 || y < 0){
+			
+			System.out.println("HateLife");
+		}
 		if(board[x][y].color == Cell.colors.BLANK){
 			board[x][y].color = playerColor;
-			if(nearbyCellOfSameColor(x, y, playerColor)){
-				recolorNearbyCells(x, y, playerColor);
-			}
+			//if(nearbyCellOfSameColor(x, y, playerColor)){
+			recolorNearbyCells(x, y, playerColor);
+			//}
 		}
 	}
 	/**
@@ -81,13 +86,13 @@ public class Board {
 	 */
 	private void recolorNearbyCells(int x, int y, Cell.colors playerColor){
 		Cell.colors oppColor = playerColor == Cell.colors.BLUE ? Cell.colors.GREEN : Cell.colors.BLUE;
-		if(board[x-1][y].color == oppColor)
+		if(x > 1 && board[x-1][y].color == oppColor)
 			board[x-1][y].color = playerColor;
-		if(board[x+1][y].color == oppColor)
+		if(x < 5 &&board[x+1][y].color == oppColor)
 			board[x+1][y].color = playerColor;
-		if(board[x][y-1].color == oppColor)
+		if(y > 1 && board[x][y-1].color == oppColor)
 			board[x][y-1].color = playerColor;
-		if(board[x][y+1].color == oppColor)
+		if(y < 5 && board[x][y+1].color == oppColor)
 			board[x][y+1].color = playerColor;
 	}
 	/**
