@@ -15,9 +15,9 @@ public class CandyGameRunner {
 		else //if(args[1].equalsIgnoreCase("AB"))
 			player1 = new AlphaBeta();
 		
-		if(args[1].equalsIgnoreCase("MM"))
+		if(args[2].equalsIgnoreCase("MM"))
 			player2 = new Minimax();
-		else //if(args[1].equalsIgnoreCase("AB"))
+		else //if(args[2].equalsIgnoreCase("AB"))
 			player2 = new AlphaBeta();
 		
 		while(!gameBoard.isGameOver()){
