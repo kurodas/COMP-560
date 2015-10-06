@@ -5,7 +5,7 @@ import java.io.FileNotFoundException;
 import main.Cell.colors;
 
 public class CandyGameRunner {
-
+/*
 	public static void main(String[] args) throws FileNotFoundException {
 		Board gameBoard = new Board(args[0]);
 		Strategy player1, player2;
@@ -27,4 +27,7 @@ public class CandyGameRunner {
 		}
 	}
 
+}
+*/
+	
 }
