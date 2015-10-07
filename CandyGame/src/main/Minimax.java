@@ -76,7 +76,7 @@ public class Minimax implements Strategy {
 			for (int y = 0; y < 6; y++){
 				if (board.getCell(x, y).color == Cell.Color.BLANK){
 					Board bClone = board.clone();
-					bClone.play(new Move(x, y, playerColor));
+					bClone.play(new Move(x, y, opponentColor));
 					int max = minimaxMax(bClone, depth + 1);
 					if(max < min){
 						min = max;

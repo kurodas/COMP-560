@@ -43,7 +43,7 @@ public class AlphaBeta implements Strategy{
 		}
 		
 		if (depth >= maxDepth){
-			return heuristicEval2(board);
+			return heuristicEval(board);
 		}
 		
 		int v = Integer.MIN_VALUE;
@@ -55,7 +55,7 @@ public class AlphaBeta implements Strategy{
 					int min = minimaxMin(bClone,depth + 1,alpha,beta);
 					v = Math.max(v, min);
 					if(beta <= v){
-						return v;//prune
+						return Integer.MAX_VALUE-1;//prune
 					}
 					alpha = Math.max(alpha, v);
 				}
@@ -72,18 +72,18 @@ public class AlphaBeta implements Strategy{
 			return winLoseCheck(board);
 		}
 		if(depth>=maxDepth){
-			return heuristicEval2(board);
+			return heuristicEval(board);
 		}
 		int v = Integer.MAX_VALUE;
 		for (int x = 0; x < 6; x++){
 			for (int y = 0; y < 6; y++){
 				if (board.getCell(x, y).color == Cell.Color.BLANK){
 					Board bClone = board.clone();
-					bClone.play(new Move(x, y, playerColor));
+					bClone.play(new Move(x, y, opponentColor));
 					int max = minimaxMax(bClone, depth + 1,alpha,beta);
 					v = Math.min(v, max);
 					if(alpha>= max){
-						return max;//prune
+						return Integer.MIN_VALUE+1;//prune
 					}
 					beta = Math.min(beta, v);
 				}
@@ -97,6 +97,7 @@ public class AlphaBeta implements Strategy{
 	//Assumes the player color given during the initialization is the positive direction
 	private int heuristicEval(Board board) {
 		int score = 0;
+		//board.printBoardState();
 		score += board.getScoreForSpace(0, 0, playerColor) * 2;
 		score += board.getScoreForSpace(0, 5, playerColor) * 2;
 		score += board.getScoreForSpace(5, 0, playerColor) * 2;
