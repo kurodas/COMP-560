@@ -21,7 +21,7 @@ public class AlphaBeta implements Strategy{
 				if (board.getCell(x, y).color == Cell.Color.BLANK){
 					Board bClone = board.clone();
 					bClone.play(new Move(x, y, playerColor));
-					int min = minimaxMin(bClone,2,alpha,Integer.MAX_VALUE);
+					int min = minimaxMin(bClone,1,alpha,Integer.MAX_VALUE);
 					if(min > max){
 						max = min;
 						bestX = x;

@@ -18,7 +18,7 @@ public class Minimax implements Strategy {
 				if (board.getCell(x, y).color == Cell.Color.BLANK){
 					Board bClone = board.clone();
 					bClone.play(new Move(x, y, playerColor));
-					int min = minimaxMin(bClone,2);
+					int min = minimaxMin(bClone,1);
 					if(min > max){
 						max = min;
 						bestX = x;
