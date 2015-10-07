@@ -3,13 +3,13 @@ package main;
 import main.Cell.Color;
 
 public class Move {
-	int x;
-	int y;
+	int row;
+	int column;
 	Color moveColor;
 	
-	public Move(int x, int y, Color mColor){
-		this.x = x;
-		this.y = y;
+	public Move(int row, int column, Color mColor){
+		this.row = row;
+		this.column = column;
 		moveColor = mColor;
 	}
 	

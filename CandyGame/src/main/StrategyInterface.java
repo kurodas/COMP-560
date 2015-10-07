@@ -2,8 +2,6 @@ package main;
 
 import main.Cell.Color;
 
-public interface Strategy {
+public interface StrategyInterface {
 	public Move move(Board board, int maxDepth, Color playerColor);
-	
-	public int winLoseCheck(Board b);
 }

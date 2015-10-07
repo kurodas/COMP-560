@@ -44,16 +44,14 @@ public class Board {
 	}
 	
 	public void play(Move move){
-		if(move.x<0 || move.y < 0){
-			System.out.println("HateLife");
-		}
-		if(board[move.x][move.y].color == Cell.Color.BLANK){
-			board[move.x][move.y].color = move.moveColor;
-			if(nearbyCellOfSameColor(move.x, move.y, move.moveColor)){
-				recolorNearbyCells(move.x, move.y, move.moveColor);
+		if(board[move.row][move.column].color == Cell.Color.BLANK){
+			board[move.row][move.column].color = move.moveColor;
+			if(nearbyCellOfSameColor(move.row, move.column, move.moveColor)){
+				recolorNearbyCells(move.row, move.column, move.moveColor);
 			}
 		}
 	}
+	
 	/**
 	 * Checks the spaces above, below, left, and right 
 	 * of the space to see if any of them are the player's color

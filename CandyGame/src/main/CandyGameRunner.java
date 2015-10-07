@@ -7,9 +7,12 @@ import main.Cell.Color;
 public class CandyGameRunner {
 
 	public static void main(String[] args) throws FileNotFoundException {
-		Board gameBoard = new Board(args[0]);
-		Strategy player1, player2;
+		AbstractStrategy player1, player2;
 		int player1MaxDepth, player2MaxDepth;
+		long startTime, endTime;
+		long player1TotalTime = 0, player2TotalTime = 0;
+		
+		Board gameBoard = new Board(args[0]);		
 		if(args.length > 1 && args[1].equalsIgnoreCase("MM")){
 			player1 = new Minimax();
 			player1MaxDepth = 3;
@@ -35,15 +38,31 @@ public class CandyGameRunner {
 		}
 		
 		while(!gameBoard.isGameOver()){
+			//Player 1 takes turn
+			startTime = System.currentTimeMillis();
 			gameBoard.play(player1.move(gameBoard, player1MaxDepth, Color.BLUE));
-			gameBoard.printBoardState();
+			endTime = System.currentTimeMillis();
+			player1TotalTime += (endTime - startTime);
+			//gameBoard.printBoardState();
+			
+			//Player 2 takes turn
 			if(!gameBoard.isGameOver()){
+				startTime = System.currentTimeMillis();
 				gameBoard.play(player2.move(gameBoard, player2MaxDepth, Color.GREEN));
-				gameBoard.printBoardState();
+				endTime = System.currentTimeMillis();
+				player2TotalTime += (endTime - startTime);
+				//gameBoard.printBoardState();
 			}
 		}
 		gameBoard.printBoardState();
-		System.out.println(player1.winLoseCheck(gameBoard));
+		System.out.println("Player 1 Score: " + player1.getScore(gameBoard));
+		System.out.println("Player 2 Score: " + player2.getScore(gameBoard));
+		System.out.println("Player 1 took an average of " + player1TotalTime/18 + " milliseconds per move");
+		System.out.println("Player 2 took an average of " + player2TotalTime/18 + " milliseconds per move");
+		System.out.println("Player 1 expanded an average of " + player1.leafNodesExpanded/18 + " nodes per move");
+		System.out.println("Player 2 expanded an average of " + player2.leafNodesExpanded/18 + " nodes per move");
+		System.out.println("Player 1 expanded " + player1.leafNodesExpanded + " nodes total");	
+		System.out.println("Player 2 expanded " + player2.leafNodesExpanded + " nodes total");
 	}
-
+	
 }
