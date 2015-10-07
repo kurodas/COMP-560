@@ -1,23 +1,23 @@
 package main;
 
-public class Minimax2 {
+public class Minimax2 implements Strategy{
 	
-	public Cell.colors playerColor;
+	public Cell.Color playerColor;
 	private int maxDepth;
-	public Cell.colors opponentColor;
+	public Cell.Color opponentColor;
 	
-	public Move move(Board board, int maxDepth, Cell.colors playerColor){
+	public Move move(Board board, int maxDepth, Cell.Color playerColor){
 		this.playerColor = playerColor;
-		this.opponentColor = playerColor == Cell.colors.BLUE ? Cell.colors.GREEN : Cell.colors.BLUE;
+		this.opponentColor = playerColor == Cell.Color.BLUE ? Cell.Color.GREEN : Cell.Color.BLUE;
 		this.maxDepth = maxDepth;
 		int max = Integer.MIN_VALUE;
 		int bestX = -1;
 		int bestY = -1;
 		for (int x = 0; x < 6; x++){
 			for (int y = 0; y < 6; y++){
-				if (board.getCell(x, y).color == Cell.colors.BLANK){
+				if (board.getCell(x, y).color == Cell.Color.BLANK){
 					Board bClone = board.clone();
-					bClone.play(x, y, playerColor);
+					bClone.play(new Move(x, y, playerColor));
 					int min = minimaxMin(bClone,2);
 					if(min > max){
 						max = min;
@@ -30,7 +30,7 @@ public class Minimax2 {
 		if(bestX < 0){
 			System.out.println("HI");
 		}
-		Move m = new Move(bestX,bestY);
+		Move m = new Move(bestX,bestY, playerColor);
 		return m;
 	}
 
@@ -48,9 +48,9 @@ public class Minimax2 {
 		int max = Integer.MIN_VALUE;
 		for (int x = 0; x < 6; x++){
 			for (int y = 0; y < 6; y++){
-				if (board.getCell(x, y).color == Cell.colors.BLANK){
+				if (board.getCell(x, y).color == Cell.Color.BLANK){
 					Board bClone = board.clone();
-					bClone.play(x, y, playerColor);
+					bClone.play(new Move(x, y, playerColor));
 					int min = minimaxMin(bClone,depth + 1);
 					if(min > max){
 						max = min;
@@ -64,7 +64,7 @@ public class Minimax2 {
 	
 	//Performs a minimum step on the MiniMax, if our depth is >= maxDepth provided during the 
 	//initialization, simply returns the heuristic evaluation of the board
-	public int minimaxMin(Board board, int depth){
+	private int minimaxMin(Board board, int depth){
 		if(board.isGameOver()){
 			return winLoseCheck(board);
 		}
@@ -74,9 +74,9 @@ public class Minimax2 {
 		int min = Integer.MAX_VALUE;
 		for (int x = 0; x < 6; x++){
 			for (int y = 0; y < 6; y++){
-				if (board.getCell(x, y).color == Cell.colors.BLANK){
+				if (board.getCell(x, y).color == Cell.Color.BLANK){
 					Board bClone = board.clone();
-					bClone.play(x, y, opponentColor);
+					bClone.play(new Move(x, y, opponentColor));
 					int max = minimaxMax(bClone, depth + 1);
 					if(max < min){
 						min = max;

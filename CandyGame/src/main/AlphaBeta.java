@@ -1,16 +1,16 @@
 package main;
 
-import main.Cell.colors;
+import main.Cell.Color;
 
 public class AlphaBeta implements Strategy{
 
-	private Cell.colors playerColor;
+	private Cell.Color playerColor;
 	private int maxDepth;
-	private Cell.colors opponentColor;
+	private Cell.Color opponentColor;
 	
-	public Move move(Board board, int maxDepth, Cell.colors playerColor){
+	public Move move(Board board, int maxDepth, Cell.Color playerColor){
 		this.playerColor = playerColor;
-		this.opponentColor = playerColor == Cell.colors.BLUE ? Cell.colors.GREEN : Cell.colors.BLUE;
+		this.opponentColor = playerColor == Cell.Color.BLUE ? Cell.Color.GREEN : Cell.Color.BLUE;
 		this.maxDepth = maxDepth;
 		int max = Integer.MIN_VALUE;
 		int bestX = -1;
@@ -18,9 +18,9 @@ public class AlphaBeta implements Strategy{
 		int alpha = Integer.MIN_VALUE;
 		for (int x = 0; x < 6; x++){
 			for (int y = 0; y < 6; y++){
-				if (board.getCell(x, y).color == Cell.colors.BLANK){
+				if (board.getCell(x, y).color == Cell.Color.BLANK){
 					Board bClone = board.clone();
-					bClone.play(x, y, playerColor);
+					bClone.play(new Move(x, y, playerColor));
 					int min = minimaxMin(bClone,2,alpha,Integer.MAX_VALUE);
 					if(min > max){
 						max = min;
@@ -31,7 +31,7 @@ public class AlphaBeta implements Strategy{
 				}
 			}
 		}
-		Move m = new Move(bestX,bestY);
+		Move m = new Move(bestX,bestY, playerColor);
 		return m;
 	}
 
@@ -49,10 +49,10 @@ public class AlphaBeta implements Strategy{
 		int v = Integer.MIN_VALUE;
 		for (int x = 0; x < 6; x++){
 			for (int y = 0; y < 6; y++){
-				if (board.getCell(x, y).color == Cell.colors.BLANK){
+				if (board.getCell(x, y).color == Cell.Color.BLANK){
 					Board bClone = board.clone();
-					bClone.play(x, y, playerColor);
-					int min = minimaxMin(bClone,depth + 1,0,0);
+					bClone.play(new Move(x, y, playerColor));
+					int min = minimaxMin(bClone,depth + 1,alpha,beta);
 					v = Math.max(v, min);
 					if(beta <= v){
 						return v;//prune
@@ -67,7 +67,7 @@ public class AlphaBeta implements Strategy{
 	
 	//Performs a minimum step on the MiniMax, if our depth is >= maxDepth provided during the 
 	//initialization, simply returns the heuristic evaluation of the board
-	public int minimaxMin(Board board, int depth, int alpha, int beta){
+	private int minimaxMin(Board board, int depth, int alpha, int beta){
 		if(board.isGameOver()){
 			return winLoseCheck(board);
 		}
@@ -77,15 +77,15 @@ public class AlphaBeta implements Strategy{
 		int v = Integer.MAX_VALUE;
 		for (int x = 0; x < 6; x++){
 			for (int y = 0; y < 6; y++){
-				if (board.getCell(x, y).color == Cell.colors.BLANK){
+				if (board.getCell(x, y).color == Cell.Color.BLANK){
 					Board bClone = board.clone();
-					bClone.play(x, y, opponentColor);
-					int max = minimaxMax(bClone, depth + 1,0,0);
+					bClone.play(new Move(x, y, playerColor));
+					int max = minimaxMax(bClone, depth + 1,alpha,beta);
 					v = Math.min(v, max);
 					if(alpha>= max){
 						return max;//prune
 					}
-					beta = Math.min(beta, max);
+					beta = Math.min(beta, v);
 				}
 			}
 		}
@@ -143,7 +143,7 @@ public class AlphaBeta implements Strategy{
 		
 	}
 	
-	private int winLoseCheck(Board b){
+	public int winLoseCheck(Board b){
 		int sum = 0;
 		for(int x = 0; x < 6; x++){
 			for(int y = 0; y < 6; y++){

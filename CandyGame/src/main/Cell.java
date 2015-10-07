@@ -1,11 +1,11 @@
 package main;
 
 public class Cell {
-	enum colors {GREEN, BLUE, BLANK};
+	public enum Color {GREEN, BLUE, BLANK};
 	public int value;
-	public colors color;
+	public Color color;
 	
-	public Cell(int v, colors c){
+	public Cell(int v, Color c){
 		value = v;
 		color = c;
 	}

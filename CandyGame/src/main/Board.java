@@ -4,7 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
-import main.Cell.colors;
+import main.Cell.Color;
 
 public class Board {
 
@@ -23,7 +23,7 @@ public class Board {
 		Scanner input = new Scanner(new File(fileLoc));
 		for(int row = 0; row < 6; row++){
 			for(int column = 0; column < 6; column++){
-				board[row][column] = new Cell(input.nextInt(), colors.BLANK);
+				board[row][column] = new Cell(input.nextInt(), Color.BLANK);
 			}
 		}
 		input.close();
@@ -43,16 +43,15 @@ public class Board {
 		return clone;
 	}
 	
-	public void play(int x, int y, Cell.colors playerColor){
-		if(x<0 || y < 0){
-			
+	public void play(Move move){
+		if(move.x<0 || move.y < 0){
 			System.out.println("HateLife");
 		}
-		if(board[x][y].color == Cell.colors.BLANK){
-			board[x][y].color = playerColor;
-			//if(nearbyCellOfSameColor(x, y, playerColor)){
-			recolorNearbyCells(x, y, playerColor);
-			//}
+		if(board[move.x][move.y].color == Cell.Color.BLANK){
+			board[move.x][move.y].color = move.moveColor;
+			if(nearbyCellOfSameColor(move.x, move.y, move.moveColor)){
+				recolorNearbyCells(move.x, move.y, move.moveColor);
+			}
 		}
 	}
 	/**
@@ -64,14 +63,14 @@ public class Board {
 	 * @return true if any vertically or horizontally adjacent spaces are playerColor
 	 * 			false otherwise
 	 */
-	private boolean nearbyCellOfSameColor(int x, int y, Cell.colors playerColor){
-		if(board[x - 1][y].color == playerColor)
+	private boolean nearbyCellOfSameColor(int x, int y, Cell.Color playerColor){
+		if(x > 0 && board[x - 1][y].color == playerColor)
 			return true;
-		else if(board[x + 1][y].color == playerColor)
+		else if(x < 5 && board[x + 1][y].color == playerColor)
 			return true;
-		else if(board[x][y + 1].color == playerColor)
+		else if(y > 0 && board[x][y - 1].color == playerColor)
 			return true;
-		else if (board[x][y + 1].color == playerColor)
+		else if (y < 5 && board[x][y + 1].color == playerColor)
 			return true;
 		else
 			return false;
@@ -84,13 +83,13 @@ public class Board {
 	 * @param y
 	 * @param playerColor
 	 */
-	private void recolorNearbyCells(int x, int y, Cell.colors playerColor){
-		Cell.colors oppColor = playerColor == Cell.colors.BLUE ? Cell.colors.GREEN : Cell.colors.BLUE;
-		if(x > 1 && board[x-1][y].color == oppColor)
+	private void recolorNearbyCells(int x, int y, Cell.Color playerColor){
+		Cell.Color oppColor = playerColor == Cell.Color.BLUE ? Cell.Color.GREEN : Cell.Color.BLUE;
+		if(x > 0 && board[x-1][y].color == oppColor)
 			board[x-1][y].color = playerColor;
 		if(x < 5 &&board[x+1][y].color == oppColor)
 			board[x+1][y].color = playerColor;
-		if(y > 1 && board[x][y-1].color == oppColor)
+		if(y > 0 && board[x][y-1].color == oppColor)
 			board[x][y-1].color = playerColor;
 		if(y < 5 && board[x][y+1].color == oppColor)
 			board[x][y+1].color = playerColor;
@@ -103,7 +102,7 @@ public class Board {
 	public boolean isGameOver(){
 		for(int x = 0; x < 6; x++){
 			for(int y = 0; y < 6; y++){
-				if(board[x][y].color == Cell.colors.BLANK){
+				if(board[x][y].color == Cell.Color.BLANK){
 					return false;
 				}
 			}
@@ -120,8 +119,8 @@ public class Board {
 	 * 			the value of the space if it is the player's color
 	 * 			the negative value of the space if it is the opponent's color
 	 */
-	public int getScoreForSpace(int x, int y, Cell.colors playerColor){
-		if(board[x][y].color == Cell.colors.BLANK){
+	public int getScoreForSpace(int x, int y, Cell.Color playerColor){
+		if(board[x][y].color == Cell.Color.BLANK){
 			return 0;
 		}
 		else if(board[x][y].color == playerColor){
@@ -130,6 +129,28 @@ public class Board {
 		else{
 			return -board[x][y].value;
 		}
+	}
+	
+	public void printBoardState(){
+		for(int row = 0; row < 6; row++){
+			for(int column = 0; column < 6; column++){
+				//Print out value of the space
+				if(board[row][column].value < 10)
+					System.out.print(" " + board[row][column].value);
+				else
+					System.out.print(board[row][column].value);
+				
+				//Print color of this space
+				if(board[row][column].color == Color.GREEN)
+					System.out.print("G ");
+				else if(board[row][column].color == Color.BLUE)
+					System.out.print("B ");
+				else
+					System.out.print("  ");
+			}
+			System.out.println();
+		}
+		System.out.println();
 	}
 	
 	

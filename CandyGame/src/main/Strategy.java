@@ -1,7 +1,9 @@
 package main;
 
-import main.Cell.colors;
+import main.Cell.Color;
 
 public interface Strategy {
-	public Move move(Board board, int maxDepth, colors playerColor);
+	public Move move(Board board, int maxDepth, Color playerColor);
+	
+	public int winLoseCheck(Board b);
 }

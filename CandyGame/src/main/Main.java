@@ -9,7 +9,7 @@ public class Main {
 		Board b = new Board();
 		for(int x = 0; x < 6; x++){
 			for(int y = 0; y < 6; y++){
-				Cell c = new Cell((int) Math.floor(Math.random() * 100), Cell.colors.BLANK);
+				Cell c = new Cell((int) Math.floor(Math.random() * 100), Cell.Color.BLANK);
 				b.board[x][y] = c;
 			}
 		}
@@ -21,16 +21,16 @@ public class Main {
 			//System.out.println("Played");
 			if(bluesTurn){
 				bluesTurn = false;
-				Move a = ab.move(b, 6, Cell.colors.BLUE);
-				b.play(a.x, a.y, Cell.colors.BLUE);
+				Move a = ab.move(b, 6, Cell.Color.BLUE);
+				b.play(a);
 			}
 			else{
 				bluesTurn = true;
-				Move a = mm2.move(b, 3, Cell.colors.GREEN);
-				b.play(a.x, a.y, Cell.colors.GREEN);
+				Move a = mm2.move(b, 3, Cell.Color.GREEN);
+				b.play(a);
 			}
 		}
-		mm.playerColor = Cell.colors.BLUE;
+		mm.playerColor = Cell.Color.BLUE;
 		int win = mm.winLoseCheck(b);
 		if(win>0){
 			bluewin++;
