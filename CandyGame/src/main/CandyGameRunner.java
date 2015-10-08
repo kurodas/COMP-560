@@ -5,9 +5,14 @@ import java.io.FileNotFoundException;
 import main.Cell.Color;
 
 public class CandyGameRunner {
-
+	
+	final int MINIMAX_MAX_DEPTH = 3;
+	final int ALPHABETA_MAX_DEPTH = 5;
+	
 	public static void main(String[] args) throws FileNotFoundException {
 		AbstractStrategy player1, player2;
+		final int MINIMAX_MAX_DEPTH = 3;
+		final int ALPHABETA_MAX_DEPTH = 6;
 		int player1MaxDepth, player2MaxDepth;
 		long startTime, endTime;
 		long player1TotalTime = 0, player2TotalTime = 0;
@@ -15,25 +20,25 @@ public class CandyGameRunner {
 		Board gameBoard = new Board(args[0]);		
 		if(args.length > 1 && args[1].equalsIgnoreCase("MM")){
 			player1 = new Minimax();
-			player1MaxDepth = 3;
+			player1MaxDepth = MINIMAX_MAX_DEPTH;
 			System.out.println("Player 1: Minimax");
 		}
 		else //if(args[1].equalsIgnoreCase("AB"))
 		{
 			player1 = new AlphaBeta();
-			player1MaxDepth = 6;
+			player1MaxDepth = ALPHABETA_MAX_DEPTH;
 			System.out.println("Player 1: Alpha-Beta");
 		}
 		
 		if(args.length > 2 && args[2].equalsIgnoreCase("MM")){
 			player2 = new Minimax();
-			player2MaxDepth = 3;
+			player2MaxDepth = MINIMAX_MAX_DEPTH;
 			System.out.println("Player 2: Minimax");
 		}
 		else //if(args[2].equalsIgnoreCase("AB"))
 		{
 			player2 = new AlphaBeta();
-			player2MaxDepth = 6;
+			player2MaxDepth = ALPHABETA_MAX_DEPTH;
 			System.out.println("Player 2: Alpha-Beta");
 		}
 		
