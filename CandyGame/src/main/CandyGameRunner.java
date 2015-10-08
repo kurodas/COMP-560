@@ -27,9 +27,9 @@ public class CandyGameRunner {
 		int minimaxMaxDepth, alphaBetaMaxDepth;
 		//Set max depths for search algorithms, either from default values or args
 		if(args.length > 3){
-			minimaxMaxDepth = Integer.parseInt(args[2]);
+			minimaxMaxDepth = Integer.parseInt(args[3]);
 			if(args.length > 4)
-				alphaBetaMaxDepth = Integer.parseInt(args[3]);
+				alphaBetaMaxDepth = Integer.parseInt(args[4]);
 			else
 				alphaBetaMaxDepth = DEFAULT_ALPHABETA_MAX_DEPTH;
 		}
