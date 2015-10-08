@@ -8,7 +8,20 @@ public class CandyGameRunner {
 	
 	static int DEFAULT_MINIMAX_MAX_DEPTH = 3;
 	static int DEFAULT_ALPHABETA_MAX_DEPTH = 6;
-	
+	/**
+	 * 
+	 * @param   args[0] = Filename of board
+	 * 			args[1] = Player 1 strategy:
+	 * 						ab = AlphaBeta
+	 * 						mm = Minimax
+	 * 			args[2] = Player 2 strategy:
+	 * 						ab = AlphaBeta
+	 * 						mm = Minimax
+	 * 			Optional parameters
+	 * 			args[3] = Minimax maxDepth
+	 * 			args[4] = AlphaBeta maxDepth
+	 * @throws FileNotFoundException
+	 */
 	public static void main(String[] args) throws FileNotFoundException {
 		AbstractStrategy player1, player2;
 		int minimaxMaxDepth, alphaBetaMaxDepth;

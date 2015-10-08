@@ -1,6 +1,11 @@
 package main;
 import main.Cell.Color;
-
+/**
+ * 
+ * Minimax search that uses heuristicEval2() instead of
+ * heuristicEval() for the evaluation function 
+ *
+ */
 public class Minimax2 extends Minimax{
 	
 	public Move move(Board board, int maxDepth, Color playerColor){

@@ -35,6 +35,7 @@ public class AlphaBeta extends AbstractStrategy{
 
 	//Performs a maximum step on the MiniMax, if our depth is >= maxDepth provided during the 
 	//initialization, simply returns the heuristic evaluation of the board
+	//Implements pseudocode for alpha-beta from the textbook
 	private int minimaxMax(Board board, int depth, int alpha, int beta){
 		if(board.isGameOver()){
 			return winLoseCheck(board);
@@ -64,7 +65,8 @@ public class AlphaBeta extends AbstractStrategy{
 	}
 	
 	//Performs a minimum step on the MiniMax, if our depth is >= maxDepth provided during the 
-	//initialization, simply returns the heuristic evaluation of the board
+	//initialization, simply returns the heuristic evaluation of the board.
+	//Implements pseudocode for alpha-beta from the textbook
 	private int minimaxMin(Board board, int depth, int alpha, int beta){
 		if(board.isGameOver()){
 			return winLoseCheck(board);
