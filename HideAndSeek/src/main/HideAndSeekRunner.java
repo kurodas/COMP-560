@@ -4,38 +4,40 @@ import java.io.FileNotFoundException;
 
 public class HideAndSeekRunner {
 	/**
-	 * 
-	 * @param args [0] = Filename of input file 
+	 * Runs hide and seek
+	 * @param   args[0] = Filename of input file
+	 * 			Optional Parameters 
 	 * 			args[1] = Assignment order: 
 	 * 						O = left-to-right
 	 * 						M = most-conflicted
-	 * 						R = random 
+	 * 						R = random
+	 * 			args[2] = Whether new input is generated
+	 * 						G = generate new input
+	 * 			args[3] = Dimensions of the board to be generated
+	 * 			args[4] = Number of trees in the board to be generated
 	 * @throws FileNotFoundException
 	 */
 	public static void main(String args[]) throws FileNotFoundException{
-		//InputGenerator.main(null);
+		//Pass parameters to inputGenerator if necessary
+		if(args.length > 2 && args[2].equalsIgnoreCase("G")){
+			if(args.length == 4){
+			InputGenerator.main(new String[]{args[3]});
+			}
+			else if(args.length == 5){
+				InputGenerator.main(new String[]{args[3], args[4]});
+			}
+			else
+				InputGenerator.main(null);
+		}
 		Forest forest = new Forest(args[0]);
-//		for (int i = 0; i < forest.getDimension(); i++) {
-//			System.out.print("For friend in column "
-//					+ forest.getFriendLocations().get(i).getColumnNumber());
-//			System.out.print(" row "
-//					+ forest.getFriendLocations().get(i).getRowNumber());
-//			System.out.print(", there are "
-//					+ forest.getFriendLocations().get(i).getConflictCount(false));
-//			System.out.println(" conflicts.");
-//		}
-		System.out.println();
-		LocalSearch search = new LocalSearch(forest, args[1]);
-		forest.printForestGrid();
-//		for (int i = 0; i < forest.getDimension(); i++) {
-//			System.out.print("For friend in column "
-//					+ forest.getFriendLocations().get(i).getColumnNumber());
-//			System.out.print(" row "
-//					+ forest.getFriendLocations().get(i).getRowNumber());
-//			System.out.print(", there are "
-//					+ forest.getFriendLocations().get(i).getConflictCount(false));
-//			System.out.println(" conflicts.");
-//		}
+		//System.out.println();
+		if(args.length > 1){
+			LocalSearch search = new LocalSearch(forest, args[1]);
+		}
+		else{
+			LocalSearch search = new LocalSearch(forest, null);
+		}
+		//forest.printForestGrid();
 		for(Space f:forest.getFriendLocations()){
 			System.out.println((f.getRowNumber() + 1) + " " + (f.getColumnNumber() + 1));
 		}

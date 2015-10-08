@@ -24,7 +24,7 @@ public class InputGenerator {
 		else
 			treeCount = Integer.parseInt(args[1]);
 		
-		System.out.println(friendCount + " " + treeCount);
+//		System.out.println(friendCount + " " + treeCount);
 		InputGeneratorSpace[] treeSpaces = new InputGeneratorSpace[treeCount];
 		InputGenerator gen = new InputGenerator();
 		for(int i = 0; i < treeCount; i++){

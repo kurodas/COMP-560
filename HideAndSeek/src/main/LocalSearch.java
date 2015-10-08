@@ -28,12 +28,12 @@ public class LocalSearch {
 		// Move friends around while there are conflicts
 		while(numberOfConflictsRemaining != 0 && resetCount < 1000){
 			//Change processing order depending on command line argument
-			if(order.equalsIgnoreCase("O")){
-				numberOfConflictsRemaining = processLeftToRight();
-			}
-			else if(order.equalsIgnoreCase("M")){
+			if(order == null || order.equalsIgnoreCase("M")){
 				numberOfConflictsRemaining = processMostConflictedFirst();
 			}
+			else if(order.equalsIgnoreCase("O")){
+				numberOfConflictsRemaining = processLeftToRight();
+			} 
 			else
 				numberOfConflictsRemaining = processRandomly();
 			
@@ -50,7 +50,7 @@ public class LocalSearch {
 		if(resetCount > 100){
 			System.out.println("No solution found after 100 resets");
 		}
-		System.out.println("Iteration count: " + iterationCount);
+//		System.out.println("Iteration count: " + iterationCount);
 		
 	}
 	//Removes any friends in spaces in column #columnNum

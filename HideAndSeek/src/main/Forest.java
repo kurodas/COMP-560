@@ -26,9 +26,9 @@ public class Forest {
 		numberOfTrees = input.nextInt();
 		
 		//Outputs number of friends and trees and the size of the forest
-		System.out.println("Number of friends: " + numberOfFriends);
-		System.out.println("Forest dimensions: " + dimension + " x " + dimension);
-		System.out.println("Number of trees: "+ numberOfTrees);
+//		System.out.println("Number of friends: " + numberOfFriends);
+//		System.out.println("Forest dimensions: " + dimension + " x " + dimension);
+//		System.out.println("Number of trees: "+ numberOfTrees);
 		
 		initializeForest(input);
 	}
@@ -46,14 +46,14 @@ public class Forest {
 		markAllSpacesEmpty();
 		markTreeSpaces(input);
 		randomlyPlaceFriends();
-		printForestGrid();
+//		printForestGrid();
 		//Calculate initial conflicts count for each friend
 		for(int i = 0; i < dimension; i++){
 			friendLocations.get(i).getConflictCount(true);
 		}
-		for(Space f: friendLocations){
-			System.out.println((f.getRowNumber() + 1) + " " + (f.getColumnNumber() + 1));
-		}
+//		for(Space f: friendLocations){
+//			System.out.println((f.getRowNumber() + 1) + " " + (f.getColumnNumber() + 1));
+//		}
 	}
 	
 	/**
