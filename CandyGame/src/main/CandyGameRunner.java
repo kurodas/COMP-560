@@ -6,13 +6,24 @@ import main.Cell.Color;
 
 public class CandyGameRunner {
 	
-	final int MINIMAX_MAX_DEPTH = 3;
-	final int ALPHABETA_MAX_DEPTH = 5;
+	static int DEFAULT_MINIMAX_MAX_DEPTH = 3;
+	static int DEFAULT_ALPHABETA_MAX_DEPTH = 6;
 	
 	public static void main(String[] args) throws FileNotFoundException {
 		AbstractStrategy player1, player2;
-		final int MINIMAX_MAX_DEPTH = 3;
-		final int ALPHABETA_MAX_DEPTH = 6;
+		int minimaxMaxDepth, alphaBetaMaxDepth;
+		//Set max depths for search algorithms, either from default values or args
+		if(args.length > 3){
+			minimaxMaxDepth = Integer.parseInt(args[2]);
+			if(args.length > 4)
+				alphaBetaMaxDepth = Integer.parseInt(args[3]);
+			else
+				alphaBetaMaxDepth = DEFAULT_ALPHABETA_MAX_DEPTH;
+		}
+		else{
+			minimaxMaxDepth = DEFAULT_MINIMAX_MAX_DEPTH;
+			alphaBetaMaxDepth = DEFAULT_ALPHABETA_MAX_DEPTH;
+		}
 		int player1MaxDepth, player2MaxDepth;
 		long startTime, endTime;
 		long player1TotalTime = 0, player2TotalTime = 0;
@@ -20,25 +31,25 @@ public class CandyGameRunner {
 		Board gameBoard = new Board(args[0]);		
 		if(args.length > 1 && args[1].equalsIgnoreCase("MM")){
 			player1 = new Minimax();
-			player1MaxDepth = MINIMAX_MAX_DEPTH;
+			player1MaxDepth = minimaxMaxDepth;
 			System.out.println("Player 1: Minimax");
 		}
 		else //if(args[1].equalsIgnoreCase("AB"))
 		{
 			player1 = new AlphaBeta();
-			player1MaxDepth = ALPHABETA_MAX_DEPTH;
+			player1MaxDepth = alphaBetaMaxDepth;
 			System.out.println("Player 1: Alpha-Beta");
 		}
 		
 		if(args.length > 2 && args[2].equalsIgnoreCase("MM")){
 			player2 = new Minimax();
-			player2MaxDepth = MINIMAX_MAX_DEPTH;
+			player2MaxDepth = minimaxMaxDepth;
 			System.out.println("Player 2: Minimax");
 		}
 		else //if(args[2].equalsIgnoreCase("AB"))
 		{
 			player2 = new AlphaBeta();
-			player2MaxDepth = ALPHABETA_MAX_DEPTH;
+			player2MaxDepth = alphaBetaMaxDepth;
 			System.out.println("Player 2: Alpha-Beta");
 		}
 		
