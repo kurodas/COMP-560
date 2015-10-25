@@ -13,6 +13,8 @@ public class SpamFilterRunner {
 	public static final int DEFAULT_K = 1;
 	public static final int DEFAULT_M = 1;
 	
+	private static double totalTrainingFileCount, spamPriorLikelihood, hamPriorLikelihood;
+	
 	/**
 	 * 
 	 * @param args [0]: Path to training files directory
@@ -45,7 +47,12 @@ public class SpamFilterRunner {
 		//Check to see if directory exists
 		if (directoryTester.isDirectory()) {
 			FeatureComputing.computeFeatures(trainingHamFilesDirectoryPath, "HAM", kValue);
+			int hamTrainingFileCount = FeatureComputing.getTrainingFileCount();
 			FeatureComputing.computeFeatures(trainingSpamFilesDirectoryPath, "SPAM", kValue);
+			int spamTrainingFileCount = FeatureComputing.getTrainingFileCount();
+			totalTrainingFileCount = hamTrainingFileCount + spamTrainingFileCount;
+			spamPriorLikelihood = spamTrainingFileCount/totalTrainingFileCount;
+			hamPriorLikelihood = hamTrainingFileCount/totalTrainingFileCount;
 			Training.Train(featureResultsFileName,"HAM", mValue);
 			Training.Train(featureResultsFileName,"SPAM", mValue);
 		}

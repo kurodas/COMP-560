@@ -8,8 +8,8 @@ import java.util.Hashtable;
 import java.util.Scanner;
 
 public class FeatureComputing {
-	//public enum EmailType {HAM, SPAM};
 	private static long wordCount;
+	private static int trainingFileCount;
 	
 	//Hashtable keeps count of occurrences of words
 	private static Hashtable<String, Long> featuresTable = new Hashtable<String, Long>();
@@ -18,6 +18,7 @@ public class FeatureComputing {
 		File trainingFilesDirectory = new File(folderPath);
 		if(trainingFilesDirectory.isDirectory()){
 			File[] trainingFiles = trainingFilesDirectory.listFiles();
+			trainingFileCount = 100;
 			for(File email : trainingFiles){
 				processEmail(email);
 			}
@@ -25,6 +26,10 @@ public class FeatureComputing {
 			if(emailType.equalsIgnoreCase("HAM") || emailType.equalsIgnoreCase("SPAM"))
 				createResultsFile(emailType);
 		}
+	}
+	
+	public static int getTrainingFileCount() {
+		return trainingFileCount;
 	}
 	
 	/**
