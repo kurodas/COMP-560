@@ -28,6 +28,12 @@ public class Testing {
 	public static void test(int mValue, int kValue, String testFileDirectoryPath,
 			Double spamPrior, Double hamPrior, String testClass)
 			throws FileNotFoundException {
+		//Reset values for back-to-back execution
+		spamLogTable.clear();
+		hamLogTable.clear();
+		classifiedEmails.clear();
+		correctlyClassifiedCount = 0;
+		
 		m = mValue;
 		k = kValue;
 		String spamTrainingResultsFileNameFull = "SPAM m=" + m + TRAINING_RESULTS_FILE_NAME_SUFFIX;
@@ -113,7 +119,10 @@ public class Testing {
 		try {
 			String outputFileName = testFileClass.toUpperCase() + " k=" + k + " m=" + m + " TestingResults.txt";
 			PrintWriter writer = new PrintWriter(outputFileName, "UTF-8");
-			writer.println("Fraction of emails correctly classified as " + testFileClass + ": " + correctlyClassifiedCount/numberOfTestFiles);
+			System.out.println("With k=" + k + " and m=" + m);
+			System.out.println("fraction of emails correctly classified as " + testFileClass + ": " + correctlyClassifiedCount/numberOfTestFiles);
+			writer.println("With k=" + k + " and m=" + m);
+			writer.println("fraction of emails correctly classified as " + testFileClass + ": " + correctlyClassifiedCount/numberOfTestFiles);
 			for(int i = 0; i < numberOfTestFiles; i++){
 				ClassifiedEmail currentEmail = classifiedEmails.get(i);
 				writer.println(currentEmail.getEmailFileName()
