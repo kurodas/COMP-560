@@ -13,16 +13,15 @@ public class Training {
 	private static int m;
 	private static long totalWordCount, lexiconSize;
 	
-	public static final String DEFAULT_FEATURE_RESULTS_FILE_NAME = "FeatureResults.txt";
+	public static final String FEATURE_RESULTS_FILE_NAME_SUFFIX = " FeatureResults.txt";
 	
-	public static void Train(String featureResultsFileName, String emailType, int mValue) throws FileNotFoundException{
-		String featureResultsFileNameFull;
-		if(featureResultsFileName != null){
-			featureResultsFileNameFull = featureResultsFileName;
-		}
-		else{
-			featureResultsFileNameFull = emailType.toUpperCase() + DEFAULT_FEATURE_RESULTS_FILE_NAME;
-		}
+	public static void train(String emailType, int mValue, int kValue) throws FileNotFoundException{
+		//Reset values for back-to-back execution
+		totalWordCount = 0;
+		lexiconSize = 0;
+		likelihoodTable.clear();
+		
+		String featureResultsFileNameFull = emailType.toUpperCase() + " k=" + kValue + FEATURE_RESULTS_FILE_NAME_SUFFIX;
 		File featureResultsFile = new File(featureResultsFileNameFull);
 		m = mValue;
 		computeLikelihoods(featureResultsFile);
@@ -53,7 +52,7 @@ public class Training {
 	 */
 	private static void createResultsFile(String emailType){
 		try {
-			PrintWriter writer = new PrintWriter(emailType.toUpperCase() + "TrainingResults.txt", "UTF-8");
+			PrintWriter writer = new PrintWriter(emailType.toUpperCase() + " m=" + m + " TrainingResults.txt", "UTF-8");
 			writer.println(totalWordCount + " " + lexiconSize);
 			Enumeration<String> strings = likelihoodTable.keys();
 			while(strings.hasMoreElements()){

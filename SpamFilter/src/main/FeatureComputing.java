@@ -9,20 +9,26 @@ import java.util.Scanner;
 
 public class FeatureComputing {
 	private static long wordCount;
-	private static int trainingFileCount;
+	private static int trainingFileCount, k;
 	
 	//Hashtable keeps count of occurrences of words
 	private static Hashtable<String, Long> featuresTable = new Hashtable<String, Long>();
 	
 	public static void computeFeatures(String folderPath, String emailType, int kValue) throws FileNotFoundException{
+		//Reset values for back-to-back execution
+		wordCount = 0;
+		featuresTable.clear();
+		trainingFileCount = 0;
+		
+		k = kValue;
 		File trainingFilesDirectory = new File(folderPath);
 		if(trainingFilesDirectory.isDirectory()){
 			File[] trainingFiles = trainingFilesDirectory.listFiles();
-			trainingFileCount = 100;
+			trainingFileCount = trainingFiles.length;
 			for(File email : trainingFiles){
 				processEmail(email);
 			}
-			cullFeatures(kValue);
+			cullFeatures();
 			if(emailType.equalsIgnoreCase("HAM") || emailType.equalsIgnoreCase("SPAM"))
 				createResultsFile(emailType);
 		}
@@ -64,12 +70,12 @@ public class FeatureComputing {
 	}
 	
 	//Removes words with fewer than K occurrences from featuresTable
-	private static void cullFeatures(int kValue){
+	private static void cullFeatures(){
 		Enumeration<String> strings = featuresTable.keys();
 		while(strings.hasMoreElements()){
 			String nextString = strings.nextElement();
 			Long occurrenceCount = featuresTable.get(nextString);
-			if(occurrenceCount.longValue() < kValue){
+			if(occurrenceCount.longValue() < k){
 				featuresTable.remove(nextString);
 			}
 		}
@@ -83,7 +89,7 @@ public class FeatureComputing {
 	 */
 	private static void createResultsFile(String emailType){
 		try {
-			PrintWriter writer = new PrintWriter(emailType.toUpperCase() + "FeatureResults.txt", "UTF-8");
+			PrintWriter writer = new PrintWriter(emailType.toUpperCase() + " k=" + k + " FeatureResults.txt", "UTF-8");
 			writer.println(wordCount + " " + featuresTable.size());
 			Enumeration<String> strings = featuresTable.keys();
 			while(strings.hasMoreElements()){
