@@ -1,0 +1,402 @@
+With k=6 and m=25
+fraction of emails correctly classified as SPAM: 0.86
+0017.2003-12-18.GP.spam.txt was classified as SPAM
+Ham posterior log: -147.0016327196154
+Spam posterior log: -142.16004839014272
+
+0032.2003-12-19.GP.spam.txt was classified as HAM
+Ham posterior log: -66.12812340757353
+Spam posterior log: -69.46631381150092
+
+0130.2004-01-01.GP.spam.txt was classified as HAM
+Ham posterior log: -24.362659469403
+Spam posterior log: -26.19292618126047
+
+0195.2004-01-12.GP.spam.txt was classified as SPAM
+Ham posterior log: -224.84977892415282
+Spam posterior log: -217.86104213799868
+
+0364.2004-02-04.GP.spam.txt was classified as SPAM
+Ham posterior log: -359.2338625694994
+Spam posterior log: -350.0543393858121
+
+0424.2004-02-12.GP.spam.txt was classified as SPAM
+Ham posterior log: -56.991372379505535
+Spam posterior log: -53.383138597428974
+
+0449.2004-02-14.GP.spam.txt was classified as SPAM
+Ham posterior log: -193.4436787868932
+Spam posterior log: -184.04069008482819
+
+0454.2004-02-16.GP.spam.txt was classified as SPAM
+Ham posterior log: -985.2699030547508
+Spam posterior log: -922.6367398670404
+
+0480.2004-02-19.GP.spam.txt was classified as SPAM
+Ham posterior log: -805.8295738253993
+Spam posterior log: -791.4971493357015
+
+0567.2004-02-24.GP.spam.txt was classified as SPAM
+Ham posterior log: -31.446080636843828
+Spam posterior log: -30.390370297873776
+
+0595.2004-03-03.GP.spam.txt was classified as SPAM
+Ham posterior log: -3099.810840978071
+Spam posterior log: -3016.5174232720337
+
+0621.2004-03-08.GP.spam.txt was classified as HAM
+Ham posterior log: -261.39906097088266
+Spam posterior log: -268.6141533587898
+
+0622.2004-03-09.GP.spam.txt was classified as SPAM
+Ham posterior log: -266.41024564121346
+Spam posterior log: -258.13265673715983
+
+0693.2004-03-21.GP.spam.txt was classified as SPAM
+Ham posterior log: -61.03380642416019
+Spam posterior log: -55.40638702668194
+
+0805.2004-04-11.GP.spam.txt was classified as SPAM
+Ham posterior log: -49.070292537095284
+Spam posterior log: -44.501389447368474
+
+0838.2004-04-13.GP.spam.txt was classified as HAM
+Ham posterior log: -510.1557471868201
+Spam posterior log: -528.7571988541612
+
+0849.2004-04-14.GP.spam.txt was classified as SPAM
+Ham posterior log: -1000.5197660676522
+Spam posterior log: -938.6933099934175
+
+0924.2004-04-24.GP.spam.txt was classified as SPAM
+Ham posterior log: -652.1628796826558
+Spam posterior log: -607.6680986703011
+
+0950.2004-04-25.GP.spam.txt was classified as SPAM
+Ham posterior log: -130.6161281250466
+Spam posterior log: -127.59377469994439
+
+1082.2004-05-11.GP.spam.txt was classified as SPAM
+Ham posterior log: -793.9836333213366
+Spam posterior log: -769.6606760287804
+
+1130.2004-05-16.GP.spam.txt was classified as SPAM
+Ham posterior log: -269.58689118088097
+Spam posterior log: -255.34633703708192
+
+1141.2004-05-17.GP.spam.txt was classified as SPAM
+Ham posterior log: -54.20781462589517
+Spam posterior log: -51.926903353784496
+
+1196.2004-05-24.GP.spam.txt was classified as SPAM
+Ham posterior log: -106.79211121081738
+Spam posterior log: -101.89237118514579
+
+1280.2004-06-05.GP.spam.txt was classified as SPAM
+Ham posterior log: -955.1883318090222
+Spam posterior log: -922.265322422536
+
+1343.2004-06-14.GP.spam.txt was classified as SPAM
+Ham posterior log: -693.6569659307776
+Spam posterior log: -651.5033045960979
+
+1400.2004-06-21.GP.spam.txt was classified as SPAM
+Ham posterior log: -297.9593140175969
+Spam posterior log: -297.48350739924325
+
+1428.2004-06-27.GP.spam.txt was classified as SPAM
+Ham posterior log: -285.4691238241268
+Spam posterior log: -273.60975163662533
+
+1489.2004-07-03.GP.spam.txt was classified as HAM
+Ham posterior log: -630.0672974552818
+Spam posterior log: -643.1447703594425
+
+1503.2004-07-07.GP.spam.txt was classified as SPAM
+Ham posterior log: -200.05871128706383
+Spam posterior log: -191.75033291859936
+
+1717.2004-07-27.GP.spam.txt was classified as SPAM
+Ham posterior log: -35.47112652543058
+Spam posterior log: -33.940279712892064
+
+1745.2004-08-01.GP.spam.txt was classified as HAM
+Ham posterior log: -149.2573391849491
+Spam posterior log: -150.93350648769382
+
+1801.2004-08-11.GP.spam.txt was classified as SPAM
+Ham posterior log: -457.376994898714
+Spam posterior log: -449.6786616729422
+
+1829.2004-08-14.GP.spam.txt was classified as SPAM
+Ham posterior log: -182.9206558736713
+Spam posterior log: -174.92925977881885
+
+1837.2004-08-14.GP.spam.txt was classified as SPAM
+Ham posterior log: -96.50667972183548
+Spam posterior log: -93.31706690828904
+
+1879.2004-08-18.GP.spam.txt was classified as SPAM
+Ham posterior log: -464.22524885675375
+Spam posterior log: -442.5237245584271
+
+2110.2004-09-10.GP.spam.txt was classified as SPAM
+Ham posterior log: -57.574927686152485
+Spam posterior log: -55.01395648066001
+
+2111.2004-09-10.GP.spam.txt was classified as SPAM
+Ham posterior log: -328.6024252620112
+Spam posterior log: -310.50638469349474
+
+2215.2004-09-20.GP.spam.txt was classified as SPAM
+Ham posterior log: -121.31205174738201
+Spam posterior log: -105.17020412331237
+
+2254.2004-09-24.GP.spam.txt was classified as SPAM
+Ham posterior log: -3556.362774729007
+Spam posterior log: -3132.2834670911134
+
+2287.2004-09-26.GP.spam.txt was classified as SPAM
+Ham posterior log: -175.1724677163686
+Spam posterior log: -172.95832023100198
+
+2348.2004-10-02.GP.spam.txt was classified as SPAM
+Ham posterior log: -25.9815123807717
+Spam posterior log: -25.64897359919603
+
+2381.2004-10-05.GP.spam.txt was classified as SPAM
+Ham posterior log: -691.3393402589776
+Spam posterior log: -663.6135426011472
+
+2391.2004-10-05.GP.spam.txt was classified as SPAM
+Ham posterior log: -79.42771084485642
+Spam posterior log: -77.64611491445612
+
+2512.2004-10-16.GP.spam.txt was classified as SPAM
+Ham posterior log: -2120.080999282626
+Spam posterior log: -2055.888398358838
+
+2549.2004-10-19.GP.spam.txt was classified as SPAM
+Ham posterior log: -693.995344540668
+Spam posterior log: -664.5711226307276
+
+2583.2004-10-23.GP.spam.txt was classified as SPAM
+Ham posterior log: -77.47672596277278
+Spam posterior log: -76.51025469587583
+
+2658.2004-10-28.GP.spam.txt was classified as HAM
+Ham posterior log: -58.90937328402948
+Spam posterior log: -59.292386737001806
+
+2668.2004-10-29.GP.spam.txt was classified as SPAM
+Ham posterior log: -38.552234364227616
+Spam posterior log: -37.49875892887776
+
+2698.2004-10-31.GP.spam.txt was classified as HAM
+Ham posterior log: -0.6931471805599453
+Spam posterior log: -0.6931471805599453
+
+2702.2004-11-01.GP.spam.txt was classified as SPAM
+Ham posterior log: -294.68935621567704
+Spam posterior log: -294.45415455117086
+
+2711.2004-11-01.GP.spam.txt was classified as SPAM
+Ham posterior log: -833.2056577723791
+Spam posterior log: -811.8471182790508
+
+2770.2004-11-10.GP.spam.txt was classified as SPAM
+Ham posterior log: -195.6090565763015
+Spam posterior log: -187.0526971123613
+
+2775.2004-11-10.GP.spam.txt was classified as SPAM
+Ham posterior log: -26.704612815324857
+Spam posterior log: -26.43875083867356
+
+2803.2004-11-12.GP.spam.txt was classified as SPAM
+Ham posterior log: -25.947086972951475
+Spam posterior log: -24.754163881355343
+
+2813.2004-11-14.GP.spam.txt was classified as SPAM
+Ham posterior log: -207.78687809474414
+Spam posterior log: -199.9244392940582
+
+2826.2004-11-16.GP.spam.txt was classified as SPAM
+Ham posterior log: -355.4885614164902
+Spam posterior log: -336.0901483664316
+
+2827.2004-11-16.GP.spam.txt was classified as SPAM
+Ham posterior log: -41.81292331794329
+Spam posterior log: -40.39985176643057
+
+2883.2004-11-20.GP.spam.txt was classified as SPAM
+Ham posterior log: -875.5965977328285
+Spam posterior log: -847.5202514430098
+
+2912.2004-11-22.GP.spam.txt was classified as SPAM
+Ham posterior log: -125.62229444831559
+Spam posterior log: -115.90741964976958
+
+2953.2004-11-26.GP.spam.txt was classified as HAM
+Ham posterior log: -107.08376998540255
+Spam posterior log: -119.06928485880258
+
+2960.2004-11-27.GP.spam.txt was classified as SPAM
+Ham posterior log: -40.97380402338629
+Spam posterior log: -39.90223808364662
+
+2971.2004-11-28.GP.spam.txt was classified as SPAM
+Ham posterior log: -867.1417149014837
+Spam posterior log: -831.5738944690186
+
+2978.2004-11-28.GP.spam.txt was classified as SPAM
+Ham posterior log: -291.3803515871697
+Spam posterior log: -274.19881098798874
+
+3012.2004-12-01.GP.spam.txt was classified as SPAM
+Ham posterior log: -394.4603317720534
+Spam posterior log: -379.13137547572285
+
+3074.2004-12-06.GP.spam.txt was classified as SPAM
+Ham posterior log: -151.60159681614954
+Spam posterior log: -146.3419195988417
+
+3079.2004-12-06.GP.spam.txt was classified as SPAM
+Ham posterior log: -186.89680992969983
+Spam posterior log: -180.99820522330762
+
+3083.2004-12-06.GP.spam.txt was classified as SPAM
+Ham posterior log: -188.2073046587665
+Spam posterior log: -180.25508595232418
+
+3110.2004-12-08.GP.spam.txt was classified as HAM
+Ham posterior log: -103.94215328455991
+Spam posterior log: -116.82898103602
+
+3113.2004-12-08.GP.spam.txt was classified as HAM
+Ham posterior log: -686.9938304938361
+Spam posterior log: -689.1953567470647
+
+3123.2004-12-09.GP.spam.txt was classified as SPAM
+Ham posterior log: -1245.3980217087515
+Spam posterior log: -1200.5322714218846
+
+3291.2004-12-25.GP.spam.txt was classified as SPAM
+Ham posterior log: -489.51694221210806
+Spam posterior log: -474.31622534939265
+
+3338.2004-12-29.GP.spam.txt was classified as SPAM
+Ham posterior log: -648.6154319636997
+Spam posterior log: -628.0306019264651
+
+3353.2004-12-30.GP.spam.txt was classified as SPAM
+Ham posterior log: -5398.865116828223
+Spam posterior log: -5266.805625896793
+
+3406.2005-01-07.GP.spam.txt was classified as SPAM
+Ham posterior log: -1662.2693013521143
+Spam posterior log: -1647.6883192517546
+
+3614.2005-01-29.GP.spam.txt was classified as HAM
+Ham posterior log: -133.36501838771346
+Spam posterior log: -134.91757661724017
+
+3717.2005-02-06.GP.spam.txt was classified as SPAM
+Ham posterior log: -363.52882939897984
+Spam posterior log: -357.9073644554623
+
+3781.2005-02-09.GP.spam.txt was classified as HAM
+Ham posterior log: -782.4575861560446
+Spam posterior log: -782.4748061567159
+
+3856.2005-02-17.GP.spam.txt was classified as SPAM
+Ham posterior log: -700.248444505185
+Spam posterior log: -689.6717765049965
+
+3883.2005-02-21.GP.spam.txt was classified as SPAM
+Ham posterior log: -419.5366131195978
+Spam posterior log: -406.9930780539211
+
+3949.2005-03-01.GP.spam.txt was classified as SPAM
+Ham posterior log: -6841.765677957599
+Spam posterior log: -6493.708434191834
+
+3954.2005-03-02.GP.spam.txt was classified as SPAM
+Ham posterior log: -1597.1069341493896
+Spam posterior log: -1525.7425314225277
+
+3963.2005-03-03.GP.spam.txt was classified as HAM
+Ham posterior log: -492.7901433869819
+Spam posterior log: -507.6840202019805
+
+3988.2005-03-06.GP.spam.txt was classified as SPAM
+Ham posterior log: -87.61047150454662
+Spam posterior log: -86.07213660717237
+
+4042.2005-03-15.GP.spam.txt was classified as SPAM
+Ham posterior log: -37.093294902056826
+Spam posterior log: -33.751288902224964
+
+4252.2005-04-13.GP.spam.txt was classified as SPAM
+Ham posterior log: -653.3965359976486
+Spam posterior log: -637.5554875171347
+
+4270.2005-04-16.GP.spam.txt was classified as SPAM
+Ham posterior log: -187.97568814851107
+Spam posterior log: -186.71031966488647
+
+4299.2005-04-18.GP.spam.txt was classified as SPAM
+Ham posterior log: -567.8776785262797
+Spam posterior log: -558.3056261568601
+
+4306.2005-04-18.GP.spam.txt was classified as SPAM
+Ham posterior log: -2678.752720340282
+Spam posterior log: -2536.273932225521
+
+4428.2005-05-01.GP.spam.txt was classified as SPAM
+Ham posterior log: -423.8921149766469
+Spam posterior log: -422.6928037026396
+
+4612.2005-06-01.GP.spam.txt was classified as SPAM
+Ham posterior log: -3255.171180407127
+Spam posterior log: -3166.70168437323
+
+4712.2005-06-14.GP.spam.txt was classified as SPAM
+Ham posterior log: -102.89033988604217
+Spam posterior log: -96.14577257071699
+
+4755.2005-06-27.GP.spam.txt was classified as SPAM
+Ham posterior log: -365.7728744824397
+Spam posterior log: -359.1656751582626
+
+4787.2005-06-29.GP.spam.txt was classified as SPAM
+Ham posterior log: -291.0604724452743
+Spam posterior log: -288.3691628550525
+
+4947.2005-08-01.GP.spam.txt was classified as SPAM
+Ham posterior log: -1138.256761969694
+Spam posterior log: -1097.3648134661266
+
+4993.2005-08-13.GP.spam.txt was classified as SPAM
+Ham posterior log: -1024.8792664213768
+Spam posterior log: -1008.0393888108745
+
+5036.2005-08-18.GP.spam.txt was classified as SPAM
+Ham posterior log: -3163.465850312031
+Spam posterior log: -3004.390247401691
+
+5042.2005-08-19.GP.spam.txt was classified as SPAM
+Ham posterior log: -36.15992346977386
+Spam posterior log: -35.220275859347
+
+5081.2005-08-25.GP.spam.txt was classified as SPAM
+Ham posterior log: -254.4039543732799
+Spam posterior log: -243.74785290886086
+
+5090.2005-08-27.GP.spam.txt was classified as SPAM
+Ham posterior log: -107.90846850431346
+Spam posterior log: -102.00745849892914
+
+5155.2005-09-05.GP.spam.txt was classified as SPAM
+Ham posterior log: -435.9465088182727
+Spam posterior log: -419.40178465539753
+

@@ -1,0 +1,402 @@
+With k=5 and m=1
+fraction of emails correctly classified as HAM: 0.92
+0079.1999-12-28.farmer.ham.txt was classified as HAM
+Ham posterior log: -447.6700840666781
+Spam posterior log: -477.7178529173146
+
+0092.1999-12-29.farmer.ham.txt was classified as HAM
+Ham posterior log: -660.7564989639445
+Spam posterior log: -681.3945615688034
+
+0157.2000-01-10.farmer.ham.txt was classified as HAM
+Ham posterior log: -1347.3514988045238
+Spam posterior log: -1547.7676953757248
+
+0300.2000-02-01.farmer.ham.txt was classified as HAM
+Ham posterior log: -373.25149063745897
+Spam posterior log: -399.46201627471066
+
+0301.2000-02-02.farmer.ham.txt was classified as HAM
+Ham posterior log: -166.6718340411014
+Spam posterior log: -183.0336085040294
+
+0351.2000-02-06.farmer.ham.txt was classified as SPAM
+Ham posterior log: -3127.4809621829704
+Spam posterior log: -3113.23144521154
+
+0384.2000-02-09.farmer.ham.txt was classified as HAM
+Ham posterior log: -1029.3653965524682
+Spam posterior log: -1048.8808606457703
+
+0459.2000-02-22.farmer.ham.txt was classified as HAM
+Ham posterior log: -1918.949339045521
+Spam posterior log: -2456.270263657922
+
+0471.2000-02-23.farmer.ham.txt was classified as HAM
+Ham posterior log: -397.41958147374106
+Spam posterior log: -444.2242929207402
+
+0472.2000-02-23.farmer.ham.txt was classified as HAM
+Ham posterior log: -63.38344755448369
+Spam posterior log: -70.1122609025533
+
+0530.2000-03-02.farmer.ham.txt was classified as HAM
+Ham posterior log: -874.2978592737128
+Spam posterior log: -899.9608151272297
+
+0579.2000-03-08.farmer.ham.txt was classified as HAM
+Ham posterior log: -1512.1274805845073
+Spam posterior log: -1730.278046988016
+
+0584.2000-03-08.farmer.ham.txt was classified as HAM
+Ham posterior log: -102.74730623067812
+Spam posterior log: -107.15160700306335
+
+0637.2000-03-20.farmer.ham.txt was classified as SPAM
+Ham posterior log: -1128.8879092771565
+Spam posterior log: -1112.2544616182793
+
+0702.2000-03-23.farmer.ham.txt was classified as HAM
+Ham posterior log: -1692.0222861450898
+Spam posterior log: -2045.3106459882445
+
+0715.2000-03-24.farmer.ham.txt was classified as HAM
+Ham posterior log: -577.4939248337463
+Spam posterior log: -751.256170861612
+
+0860.2000-04-05.farmer.ham.txt was classified as HAM
+Ham posterior log: -663.2833696880682
+Spam posterior log: -701.1642972465503
+
+0876.2000-04-06.farmer.ham.txt was classified as HAM
+Ham posterior log: -1500.9592501745215
+Spam posterior log: -1773.947520218471
+
+0909.2000-04-11.farmer.ham.txt was classified as HAM
+Ham posterior log: -2477.0846898735035
+Spam posterior log: -3071.4145722671406
+
+0922.2000-04-12.farmer.ham.txt was classified as HAM
+Ham posterior log: -1869.3862825760857
+Spam posterior log: -2255.874448384207
+
+0936.2000-04-14.farmer.ham.txt was classified as HAM
+Ham posterior log: -353.6734832522805
+Spam posterior log: -373.8405345662503
+
+0982.2000-04-24.farmer.ham.txt was classified as HAM
+Ham posterior log: -890.0084353047525
+Spam posterior log: -911.4623369507815
+
+1065.2000-05-11.farmer.ham.txt was classified as HAM
+Ham posterior log: -4978.206706677175
+Spam posterior log: -6066.629092929473
+
+1083.2000-05-17.farmer.ham.txt was classified as HAM
+Ham posterior log: -2724.5652426820056
+Spam posterior log: -3112.9524157771634
+
+1086.2000-05-18.farmer.ham.txt was classified as HAM
+Ham posterior log: -2832.4968584694
+Spam posterior log: -3165.908428864545
+
+1097.2000-05-19.farmer.ham.txt was classified as HAM
+Ham posterior log: -710.2433923363965
+Spam posterior log: -711.1101574732794
+
+1098.2000-05-19.farmer.ham.txt was classified as HAM
+Ham posterior log: -971.9157212565731
+Spam posterior log: -1130.3232628060744
+
+1215.2000-06-02.farmer.ham.txt was classified as HAM
+Ham posterior log: -495.8714546177217
+Spam posterior log: -523.3837626283765
+
+1242.2000-06-05.farmer.ham.txt was classified as HAM
+Ham posterior log: -363.6963101137205
+Spam posterior log: -448.945146318752
+
+1281.2000-06-08.farmer.ham.txt was classified as HAM
+Ham posterior log: -121.58419978963282
+Spam posterior log: -129.4208717289839
+
+1311.2000-06-09.farmer.ham.txt was classified as HAM
+Ham posterior log: -1215.490528489984
+Spam posterior log: -1420.9126034065168
+
+1364.2000-06-16.farmer.ham.txt was classified as HAM
+Ham posterior log: -2345.2391253176834
+Spam posterior log: -2651.099896015635
+
+1497.2000-06-27.farmer.ham.txt was classified as HAM
+Ham posterior log: -166.87941736100606
+Spam posterior log: -169.85240577808702
+
+1525.2000-06-28.farmer.ham.txt was classified as HAM
+Ham posterior log: -448.23562670347235
+Spam posterior log: -453.2304374041971
+
+1528.2000-06-28.farmer.ham.txt was classified as HAM
+Ham posterior log: -1506.9715177122537
+Spam posterior log: -1952.125477143712
+
+1539.2000-06-29.farmer.ham.txt was classified as HAM
+Ham posterior log: -2648.073932888628
+Spam posterior log: -3219.1239183033263
+
+1567.2000-06-30.farmer.ham.txt was classified as HAM
+Ham posterior log: -175.64230927590344
+Spam posterior log: -199.7054582584497
+
+1623.2000-07-13.farmer.ham.txt was classified as HAM
+Ham posterior log: -422.29469129504577
+Spam posterior log: -435.77064363285587
+
+1780.2000-07-28.farmer.ham.txt was classified as HAM
+Ham posterior log: -220.28452023375016
+Spam posterior log: -241.2768300866563
+
+1853.2000-08-02.farmer.ham.txt was classified as HAM
+Ham posterior log: -585.5285256073151
+Spam posterior log: -609.6808578041137
+
+1903.2000-08-09.farmer.ham.txt was classified as HAM
+Ham posterior log: -1601.928271165265
+Spam posterior log: -1847.1571958985182
+
+1925.2000-08-11.farmer.ham.txt was classified as HAM
+Ham posterior log: -197.5269485350504
+Spam posterior log: -246.60915202423257
+
+2008.2000-08-23.farmer.ham.txt was classified as HAM
+Ham posterior log: -1911.1310628871638
+Spam posterior log: -2164.160664425043
+
+2023.2000-08-24.farmer.ham.txt was classified as HAM
+Ham posterior log: -617.4864378597086
+Spam posterior log: -617.9283104360378
+
+2054.2000-08-28.farmer.ham.txt was classified as HAM
+Ham posterior log: -179.236522431779
+Spam posterior log: -190.16368198641678
+
+2104.2000-08-31.farmer.ham.txt was classified as HAM
+Ham posterior log: -294.66929036017433
+Spam posterior log: -308.4045459200349
+
+2138.2000-09-01.farmer.ham.txt was classified as HAM
+Ham posterior log: -805.1966191650168
+Spam posterior log: -881.2603684302952
+
+2151.2000-09-05.farmer.ham.txt was classified as SPAM
+Ham posterior log: -2079.847616889239
+Spam posterior log: -2000.4554297573761
+
+2154.2000-09-05.farmer.ham.txt was classified as HAM
+Ham posterior log: -722.2559252584158
+Spam posterior log: -888.8756423466705
+
+2224.2000-09-12.farmer.ham.txt was classified as HAM
+Ham posterior log: -138.10689268738838
+Spam posterior log: -170.72355415046516
+
+2243.2000-09-14.farmer.ham.txt was classified as HAM
+Ham posterior log: -137.96379184374769
+Spam posterior log: -168.64411260878532
+
+2278.2000-09-19.farmer.ham.txt was classified as HAM
+Ham posterior log: -531.100999680747
+Spam posterior log: -601.8630984117606
+
+2307.2000-09-21.farmer.ham.txt was classified as HAM
+Ham posterior log: -207.64009975420672
+Spam posterior log: -258.4220199929002
+
+2318.2000-09-22.farmer.ham.txt was classified as HAM
+Ham posterior log: -219.58238957576535
+Spam posterior log: -233.17586184194764
+
+2360.2000-09-27.farmer.ham.txt was classified as HAM
+Ham posterior log: -810.0237177269963
+Spam posterior log: -827.5433017002293
+
+2448.2000-10-05.farmer.ham.txt was classified as HAM
+Ham posterior log: -335.64425009289516
+Spam posterior log: -345.8141056511349
+
+2723.2000-10-31.farmer.ham.txt was classified as HAM
+Ham posterior log: -132.2122983959488
+Spam posterior log: -164.16376495525986
+
+2754.2000-11-02.farmer.ham.txt was classified as HAM
+Ham posterior log: -3302.054647007277
+Spam posterior log: -4244.957259037946
+
+2762.2000-11-02.farmer.ham.txt was classified as HAM
+Ham posterior log: -2261.528038601
+Spam posterior log: -2676.6571614901027
+
+2820.2000-11-13.farmer.ham.txt was classified as HAM
+Ham posterior log: -1187.3225722613445
+Spam posterior log: -1219.499974023698
+
+2870.2000-11-16.farmer.ham.txt was classified as HAM
+Ham posterior log: -4279.596841323145
+Spam posterior log: -4971.236310148134
+
+2936.2000-11-27.farmer.ham.txt was classified as HAM
+Ham posterior log: -369.20382875201886
+Spam posterior log: -405.0832717708858
+
+2966.2000-11-29.farmer.ham.txt was classified as HAM
+Ham posterior log: -413.94562135484443
+Spam posterior log: -439.28593814596525
+
+2990.2000-12-01.farmer.ham.txt was classified as HAM
+Ham posterior log: -115.45830327871312
+Spam posterior log: -141.3671361597744
+
+2991.2000-12-01.farmer.ham.txt was classified as HAM
+Ham posterior log: -100.27373512077398
+Spam posterior log: -126.98466958286205
+
+2998.2000-12-04.farmer.ham.txt was classified as HAM
+Ham posterior log: -605.7211314337864
+Spam posterior log: -663.3708402980636
+
+3360.2001-01-17.farmer.ham.txt was classified as HAM
+Ham posterior log: -371.2940468991754
+Spam posterior log: -373.2189211328847
+
+3444.2001-01-26.farmer.ham.txt was classified as HAM
+Ham posterior log: -231.0725557126406
+Spam posterior log: -254.81384086613733
+
+3450.2001-01-26.farmer.ham.txt was classified as HAM
+Ham posterior log: -3684.018261872391
+Spam posterior log: -4405.103858157155
+
+3470.2001-01-29.farmer.ham.txt was classified as HAM
+Ham posterior log: -447.1407813994634
+Spam posterior log: -481.1537360891892
+
+3480.2001-01-30.farmer.ham.txt was classified as HAM
+Ham posterior log: -101.65910207701518
+Spam posterior log: -133.64907860321244
+
+3527.2001-02-05.farmer.ham.txt was classified as HAM
+Ham posterior log: -295.16498176991684
+Spam posterior log: -359.0932734364959
+
+3549.2001-02-07.farmer.ham.txt was classified as HAM
+Ham posterior log: -131.52356980915886
+Spam posterior log: -149.35546716617858
+
+3593.2001-02-16.farmer.ham.txt was classified as HAM
+Ham posterior log: -3554.815585529072
+Spam posterior log: -4765.188704527178
+
+3626.2001-02-21.farmer.ham.txt was classified as SPAM
+Ham posterior log: -1269.8219538871283
+Spam posterior log: -1268.4067563286683
+
+3628.2001-02-21.farmer.ham.txt was classified as HAM
+Ham posterior log: -858.7284980211379
+Spam posterior log: -1069.9482108306802
+
+3650.2001-02-23.farmer.ham.txt was classified as HAM
+Ham posterior log: -444.8684156439613
+Spam posterior log: -492.41296600801206
+
+3680.2001-02-27.farmer.ham.txt was classified as HAM
+Ham posterior log: -504.9664332941006
+Spam posterior log: -522.9203281527552
+
+3753.2001-03-12.farmer.ham.txt was classified as HAM
+Ham posterior log: -2375.7312071482
+Spam posterior log: -2894.869387256857
+
+3798.2001-03-14.farmer.ham.txt was classified as HAM
+Ham posterior log: -281.0722741208907
+Spam posterior log: -300.22769389877516
+
+3933.2001-03-22.farmer.ham.txt was classified as SPAM
+Ham posterior log: -126.0303618019845
+Spam posterior log: -121.21149854758363
+
+3976.2001-03-23.farmer.ham.txt was classified as HAM
+Ham posterior log: -313.7165123187809
+Spam posterior log: -338.41505616607736
+
+4082.2001-03-29.farmer.ham.txt was classified as HAM
+Ham posterior log: -804.8693675859889
+Spam posterior log: -815.1351340456413
+
+4084.2001-03-29.farmer.ham.txt was classified as HAM
+Ham posterior log: -804.8693675859889
+Spam posterior log: -815.1351340456413
+
+4168.2001-04-03.farmer.ham.txt was classified as HAM
+Ham posterior log: -2210.305651800664
+Spam posterior log: -2495.3825221156244
+
+4180.2001-04-04.farmer.ham.txt was classified as HAM
+Ham posterior log: -486.35653741092744
+Spam posterior log: -569.9502830943958
+
+4189.2001-04-05.farmer.ham.txt was classified as HAM
+Ham posterior log: -70.4410153303893
+Spam posterior log: -77.88051389218697
+
+4271.2001-04-11.farmer.ham.txt was classified as HAM
+Ham posterior log: -512.9310512241892
+Spam posterior log: -605.9101227135919
+
+4316.2001-04-19.farmer.ham.txt was classified as HAM
+Ham posterior log: -376.67061964246767
+Spam posterior log: -390.6913239697603
+
+4352.2001-04-24.farmer.ham.txt was classified as HAM
+Ham posterior log: -2751.1839892755374
+Spam posterior log: -3082.168879716694
+
+4372.2001-04-24.farmer.ham.txt was classified as HAM
+Ham posterior log: -1148.6711216490783
+Spam posterior log: -1347.4121671823023
+
+4436.2001-04-30.farmer.ham.txt was classified as HAM
+Ham posterior log: -1128.1804181287964
+Spam posterior log: -1352.3448842611406
+
+4499.2001-05-07.farmer.ham.txt was classified as HAM
+Ham posterior log: -87.2812949012065
+Spam posterior log: -109.09097838437056
+
+4501.2001-05-07.farmer.ham.txt was classified as HAM
+Ham posterior log: -793.6613618005882
+Spam posterior log: -873.6462166428638
+
+4605.2001-05-24.farmer.ham.txt was classified as HAM
+Ham posterior log: -3196.93019422473
+Spam posterior log: -3510.6167597043027
+
+4731.2001-07-09.farmer.ham.txt was classified as SPAM
+Ham posterior log: -2257.961403480491
+Spam posterior log: -2224.0299851621103
+
+4734.2001-07-09.farmer.ham.txt was classified as HAM
+Ham posterior log: -272.65208377681654
+Spam posterior log: -284.66235787870755
+
+4861.2001-09-05.farmer.ham.txt was classified as HAM
+Ham posterior log: -715.1725964540292
+Spam posterior log: -772.7182199770393
+
+5067.2001-11-13.farmer.ham.txt was classified as SPAM
+Ham posterior log: -1557.6164688838633
+Spam posterior log: -1501.2276675389614
+
+5095.2001-12-02.farmer.ham.txt was classified as SPAM
+Ham posterior log: -3285.651091346155
+Spam posterior log: -3177.4928318762254
+

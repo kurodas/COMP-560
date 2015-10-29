@@ -14,7 +14,7 @@ public class Testing {
 	
 	private static int m, k; 
 	private static double spamPriorLikelihoodLog, hamPriorLikelihoodLog, numberOfTestFiles, correctlyClassifiedCount; 
-	private static long spamTotalWordCount, spamLexiconSize, hamTotalWordCount, hamLexiconSize;
+	private static long totalWordCount, lexiconSize;
 	
 	private static Hashtable<String, Double> spamLogTable = new Hashtable<String, Double>();
 	private static Hashtable<String, Double> hamLogTable = new Hashtable<String, Double>();
@@ -22,8 +22,8 @@ public class Testing {
 
 	private static String testFileClass;
 	
-	//The values to be used for words that were not seen during training
-	private static double spamDefaultLikelihoodLog, hamDefaultLikelihoodLog;
+//	The values to be used for words that were not seen during training
+//	private static double spamDefaultLikelihoodLog, hamDefaultLikelihoodLog;
 	
 	public static void test(int mValue, int kValue, String testFileDirectoryPath,
 			Double spamPrior, Double hamPrior, String testClass)
@@ -59,15 +59,15 @@ public class Testing {
 		Scanner fileScanner = new Scanner(new File(trainingFileName));
 		Hashtable<String, Double> currentTable;
 		if(emailType.equalsIgnoreCase("HAM")){
-			hamTotalWordCount = fileScanner.nextLong();
-			hamLexiconSize = fileScanner.nextLong();
-			hamDefaultLikelihoodLog = Math.log((double)m/(hamTotalWordCount + hamLexiconSize*m));
+			totalWordCount = fileScanner.nextLong();
+			lexiconSize = fileScanner.nextLong();
+//			hamDefaultLikelihoodLog = Math.log((double)m/(hamTotalWordCount + hamLexiconSize*m));
 			currentTable = hamLogTable;
 		}
 		else{
-			spamTotalWordCount = fileScanner.nextLong();
-			spamLexiconSize = fileScanner.nextLong();
-			spamDefaultLikelihoodLog = Math.log((double)m/(spamTotalWordCount + spamLexiconSize*m));
+			totalWordCount = fileScanner.nextLong();
+			lexiconSize = fileScanner.nextLong();
+//			spamDefaultLikelihoodLog = Math.log((double)m/(spamTotalWordCount + spamLexiconSize*m));
 			currentTable = spamLogTable;
 		}
 		while(fileScanner.hasNext()){
@@ -90,15 +90,15 @@ public class Testing {
 			if(hamLikelihood != null){
 				hamPosterior += hamLikelihood.doubleValue();
 			}
-			else{
-				hamPosterior += hamDefaultLikelihoodLog;
-			}
+//			else{
+//				hamPosterior += hamDefaultLikelihoodLog;
+//			}
 			if(spamLikelihood != null){
 				spamPosterior += spamLikelihood.doubleValue();
 			}
-			else{
-				spamPosterior += spamDefaultLikelihoodLog;
-			}
+//			else{
+//				spamPosterior += spamDefaultLikelihoodLog;
+//			}
 		}
 		if(hamPosterior >= spamPosterior){
 			classifiedEmails.add(new ClassifiedEmail(email.getName(), "HAM", spamPosterior, hamPosterior));

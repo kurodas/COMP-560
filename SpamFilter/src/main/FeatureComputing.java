@@ -9,33 +9,50 @@ import java.util.Scanner;
 
 public class FeatureComputing {
 	private static long wordCount;
-	private static int trainingFileCount, k;
+	private static int hamTrainingFileCount, spamTrainingFileCount, k;
 	
 	//Hashtable keeps count of occurrences of words
-	private static Hashtable<String, Long> featuresTable = new Hashtable<String, Long>();
+	private static Hashtable<String, Feature> featuresTable = new Hashtable<String, Feature>();
 	
-	public static void computeFeatures(String folderPath, String emailType, int kValue) throws FileNotFoundException{
+	public static void computeFeatures(String hamFolderPath, String spamFolderPath, int kValue) throws FileNotFoundException{
 		//Reset values for back-to-back execution
 		wordCount = 0;
 		featuresTable.clear();
-		trainingFileCount = 0;
+		hamTrainingFileCount = 0;
+		spamTrainingFileCount = 0;
 		
 		k = kValue;
-		File trainingFilesDirectory = new File(folderPath);
-		if(trainingFilesDirectory.isDirectory()){
-			File[] trainingFiles = trainingFilesDirectory.listFiles();
-			trainingFileCount = trainingFiles.length;
+		
+		
+		//Compute features of ham training files
+		File hamtrainingFilesDirectory = new File(hamFolderPath);
+		if(hamtrainingFilesDirectory.isDirectory()){
+			File[] trainingFiles = hamtrainingFilesDirectory.listFiles();
+			hamTrainingFileCount += trainingFiles.length;
 			for(File email : trainingFiles){
-				processEmail(email);
+				processEmail(email, "HAM");
 			}
-			cullFeatures();
-			if(emailType.equalsIgnoreCase("HAM") || emailType.equalsIgnoreCase("SPAM"))
-				createResultsFile(emailType);
 		}
+		
+		//Compute features of spam training files 
+		File spamtrainingFilesDirectory = new File(spamFolderPath);
+		if(spamtrainingFilesDirectory.isDirectory()){
+			File[] trainingFiles = spamtrainingFilesDirectory.listFiles();
+			spamTrainingFileCount += trainingFiles.length;
+			for(File email : trainingFiles){
+				processEmail(email, "SPAM");
+			}
+		}
+		cullFeatures();
+		createResultsFile();
 	}
 	
-	public static int getTrainingFileCount() {
-		return trainingFileCount;
+	public static int getHamTrainingFileCount() {
+		return hamTrainingFileCount;
+	}
+	
+	public static int getSpamTrainingFileCount() {
+		return spamTrainingFileCount;
 	}
 	
 	/**
@@ -45,38 +62,45 @@ public class FeatureComputing {
 	 * @param email
 	 * @throws FileNotFoundException
 	 */
-	private static void processEmail(File email) throws FileNotFoundException{
+	private static void processEmail(File email, String emailType) throws FileNotFoundException{
 		Scanner emailScanner = new Scanner(email);
 		while(emailScanner.hasNext()){
 			String currentString = emailScanner.next();
-//			if (!currentString.equalsIgnoreCase(".")
-//					&& !currentString.equalsIgnoreCase(",")
-//					&& !currentString.equalsIgnoreCase("-")
-//					&& !currentString.equalsIgnoreCase("/")
-//					&& !currentString.equalsIgnoreCase("\\")
-//					&& !currentString.equalsIgnoreCase("\'")
-//					&& !currentString.equalsIgnoreCase("\"")) {
 			wordCount++;
-				if (!featuresTable.containsKey(currentString)) {
-					featuresTable.put(currentString, new Long(1));
-				} else {
-					Long previousCount = featuresTable.get(currentString);
-					Long newCount = new Long(previousCount.longValue() + 1);
-					featuresTable.put(currentString, newCount);
+			//Insert previously unseen features into the feature table
+			if (!featuresTable.containsKey(currentString)) {
+				Feature newFeature = new Feature(currentString);
+				//Increment the count of the appropriate type
+				if(emailType.equalsIgnoreCase("SPAM")){
+					newFeature.spamOccurrenceCount++;
 				}
-//			}
+				else{
+					newFeature.hamOccurrenceCount++;
+				}
+				featuresTable.put(currentString, newFeature);
+			} else {
+				//Update count for previously seen feature
+				Feature existingFeature = featuresTable.get(currentString);
+				//Increment the count of the appropriate type
+				if(emailType.equalsIgnoreCase("SPAM")){
+					existingFeature.spamOccurrenceCount++;
+				}
+				else{
+					existingFeature.hamOccurrenceCount++;
+				}
+			}
 		}
 		emailScanner.close();
 	}
 	
-	//Removes words with fewer than K occurrences from featuresTable
+	//Removes words with fewer than K occurrences in either class from featuresTable 
 	private static void cullFeatures(){
 		Enumeration<String> strings = featuresTable.keys();
 		while(strings.hasMoreElements()){
-			String nextString = strings.nextElement();
-			Long occurrenceCount = featuresTable.get(nextString);
-			if(occurrenceCount.longValue() < k){
-				featuresTable.remove(nextString);
+			String currentString = strings.nextElement();
+			Feature currentFeature = featuresTable.get(currentString);
+			if(currentFeature.hamOccurrenceCount <= k && currentFeature.spamOccurrenceCount <= k){
+				featuresTable.remove(currentString);
 			}
 		}
 	}
@@ -84,18 +108,19 @@ public class FeatureComputing {
 	 * Outputs results of feature computing as text file
 	 * First line has total word count in training examples and size of lexicon
 	 * Each line after that has a word and the number of times 
-	 * that that word was seen in the training examples for emailType
+	 * that that word was seen in the training examples for spam and ham, in that order.
 	 * @param emailType
 	 */
-	private static void createResultsFile(String emailType){
+	private static void createResultsFile(){
 		try {
-			PrintWriter writer = new PrintWriter(emailType.toUpperCase() + " k=" + k + " FeatureResults.txt", "UTF-8");
+			PrintWriter writer = new PrintWriter("k=" + k + " FeatureResults.txt", "UTF-8");
 			writer.println(wordCount + " " + featuresTable.size());
 			Enumeration<String> strings = featuresTable.keys();
 			while(strings.hasMoreElements()){
 				String nextString = strings.nextElement();
-				Long occurrenceCount = featuresTable.get(nextString);
-				writer.println(nextString + " " + occurrenceCount.longValue());
+				long spamOccurrenceCount = featuresTable.get(nextString).spamOccurrenceCount;
+				long hamOccurrenceCount = featuresTable.get(nextString).hamOccurrenceCount;
+				writer.println(nextString + " " + spamOccurrenceCount + " " + hamOccurrenceCount);
 			}
 			writer.close();
 		} catch (Exception e) {

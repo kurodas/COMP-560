@@ -9,23 +9,24 @@ import java.util.Scanner;
 
 public class Training {
 
-	private static Hashtable<String, Double> likelihoodTable = new Hashtable<String, Double>();
+	private static Hashtable<String, Likelihood> likelihoodTable = new Hashtable<String, Likelihood>();
 	private static int m;
 	private static long totalWordCount, lexiconSize;
 	
 	public static final String FEATURE_RESULTS_FILE_NAME_SUFFIX = " FeatureResults.txt";
 	
-	public static void train(String emailType, int mValue, int kValue) throws FileNotFoundException{
+	public static void train(int mValue, int kValue) throws FileNotFoundException{
 		//Reset values for back-to-back execution
 		totalWordCount = 0;
 		lexiconSize = 0;
 		likelihoodTable.clear();
 		
-		String featureResultsFileNameFull = emailType.toUpperCase() + " k=" + kValue + FEATURE_RESULTS_FILE_NAME_SUFFIX;
+		String featureResultsFileNameFull = "k=" + kValue + FEATURE_RESULTS_FILE_NAME_SUFFIX;
 		File featureResultsFile = new File(featureResultsFileNameFull);
 		m = mValue;
 		computeLikelihoods(featureResultsFile);
-		createResultsFile(emailType);
+		createResultsFile("HAM");
+		createResultsFile("SPAM");
 	}
 	
 	private static void computeLikelihoods(File featureResultsFile) throws FileNotFoundException{
@@ -35,9 +36,11 @@ public class Training {
 		while(trainingScanner.hasNext()){
 			String currentWord = trainingScanner.next();
 			if(trainingScanner.hasNext()){
-				double count = trainingScanner.nextLong();
-				Double likelihood = (count + m)/(totalWordCount + lexiconSize * m); 
-				likelihoodTable.put(currentWord, likelihood);
+				double spamCount = trainingScanner.nextLong();
+				double hamCount = trainingScanner.nextLong();
+				double spamLikelihood = (spamCount + m)/(totalWordCount + lexiconSize * m);
+				double hamLikelihood = (hamCount + m)/(totalWordCount + lexiconSize * m);
+				likelihoodTable.put(currentWord, new Likelihood(currentWord, spamLikelihood, hamLikelihood));
 			}
 		}
 		trainingScanner.close();
@@ -57,8 +60,11 @@ public class Training {
 			Enumeration<String> strings = likelihoodTable.keys();
 			while(strings.hasMoreElements()){
 				String nextString = strings.nextElement();
-				Double likelihood = likelihoodTable.get(nextString);
-				writer.println(nextString + " " + likelihood.doubleValue());
+				Likelihood likelihood = likelihoodTable.get(nextString);
+				if(emailType.equalsIgnoreCase("SPAM"))
+					writer.println(nextString + " " + likelihood.spamLikelihood);
+				else
+					writer.println(nextString + " " + likelihood.hamLikelihood);
 			}
 			writer.close();
 		} catch (Exception e) {

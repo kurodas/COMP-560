@@ -47,17 +47,15 @@ public class SpamFilterRunner {
 				File directoryTester = new File(HAM_TRAINING_FILES_DIRECTORY_PATH);
 				//Check to see if directory exists
 				if (directoryTester.isDirectory()) {
-					FeatureComputing.computeFeatures(HAM_TRAINING_FILES_DIRECTORY_PATH, "HAM", kValue);
-					int hamTrainingFileCount = FeatureComputing.getTrainingFileCount();
-					FeatureComputing.computeFeatures(SPAM_TRAINING_FILES_DIRECTORY_PATH, "SPAM", kValue);
-					int spamTrainingFileCount = FeatureComputing.getTrainingFileCount();
+					FeatureComputing.computeFeatures(HAM_TRAINING_FILES_DIRECTORY_PATH, SPAM_TRAINING_FILES_DIRECTORY_PATH, kValue);
+					int hamTrainingFileCount = FeatureComputing.getHamTrainingFileCount();
+					int spamTrainingFileCount = FeatureComputing.getSpamTrainingFileCount();
 					
 					totalTrainingFileCount = hamTrainingFileCount + spamTrainingFileCount;
 					spamPriorLikelihood = spamTrainingFileCount/totalTrainingFileCount;
 					hamPriorLikelihood = hamTrainingFileCount/totalTrainingFileCount;
 					
-					Training.train("HAM", mValue, kValue);
-					Training.train("SPAM", mValue, kValue);
+					Training.train(mValue, kValue);
 					Testing.test(mValue, kValue, HAM_TEST_FILES_DIRECTORY_PATH,
 							spamPriorLikelihood, hamPriorLikelihood, "HAM");
 					Testing.test(mValue, kValue,
