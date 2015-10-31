@@ -12,11 +12,10 @@ public class SpamFilterRunner {
 	public static final String HAM_TEST_FILES_DIRECTORY_PATH = "emails/hamtesting/";
 	public static final String SPAM_TEST_FILES_DIRECTORY_PATH = "emails/spamtesting/";
 	
-	public static final int DEFAULT_K = 1;
-	public static final int DEFAULT_M = 1;
+	public static final int[] DEFAULT_K_VALUES = {1,2,3,4,5,6,10,25};
+	public static final int[] DEFAULT_M_VALUES = {1, 5, 10, 25, 50};
 	
-	public static final int[] K_VALUES = {1,2,3,4,5,6,10,25};
-	public static final int[] M_VALUES = {1, 5, 10, 25, 50};
+	public static int[] kValues, mValues;
 	
 	private static double totalTrainingFileCount, spamPriorLikelihood, hamPriorLikelihood;
 	
@@ -30,19 +29,19 @@ public class SpamFilterRunner {
 		int kValue, mValue;
 		//Check to see if arguments were inputed through the command line 
 
-//		if (args.length == EXPECTED_ARG_COUNT ) {
-//			kValue = Integer.parseInt(args[0]);
-//			mValue = Integer.parseInt(args[1]);
-//		}
-//		//Else use default values
-//		else{
-//			kValue = DEFAULT_K;
-//			mValue = DEFAULT_M;
-//		}
-		for(int kIndex=0; kIndex < K_VALUES.length; kIndex++){
-			kValue = K_VALUES[kIndex];
-			for(int mIndex = 0; mIndex < M_VALUES.length; mIndex++){
-				mValue = M_VALUES[mIndex];
+		if (args.length == EXPECTED_ARG_COUNT ) {
+			kValues = new int[]{Integer.parseInt(args[0])};
+			mValues = new int[]{Integer.parseInt(args[1])};
+		}
+		//Else use default values
+		else{
+			kValues = DEFAULT_K_VALUES;
+			mValues = DEFAULT_M_VALUES;
+		}
+		for(int kIndex=0; kIndex < kValues.length; kIndex++){
+			kValue = kValues[kIndex];
+			for(int mIndex = 0; mIndex < mValues.length; mIndex++){
+				mValue = mValues[mIndex];
 
 				File directoryTester = new File(HAM_TRAINING_FILES_DIRECTORY_PATH);
 				//Check to see if directory exists

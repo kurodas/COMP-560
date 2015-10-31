@@ -10,7 +10,7 @@ import java.util.Scanner;
 public class Training {
 
 	private static Hashtable<String, Likelihood> likelihoodTable = new Hashtable<String, Likelihood>();
-	private static int m;
+	private static int m, k;
 	private static long totalWordCount, lexiconSize;
 	
 	public static final String FEATURE_RESULTS_FILE_NAME_SUFFIX = " FeatureResults.txt";
@@ -24,6 +24,7 @@ public class Training {
 		String featureResultsFileNameFull = "k=" + kValue + FEATURE_RESULTS_FILE_NAME_SUFFIX;
 		File featureResultsFile = new File(featureResultsFileNameFull);
 		m = mValue;
+		k = kValue;
 		computeLikelihoods(featureResultsFile);
 		createResultsFile("HAM");
 		createResultsFile("SPAM");
@@ -55,7 +56,7 @@ public class Training {
 	 */
 	private static void createResultsFile(String emailType){
 		try {
-			PrintWriter writer = new PrintWriter(emailType.toUpperCase() + " m=" + m + " TrainingResults.txt", "UTF-8");
+			PrintWriter writer = new PrintWriter(emailType.toUpperCase() + " k=" + k + " m=" + m + " TrainingResults.txt", "UTF-8");
 			writer.println(totalWordCount + " " + lexiconSize);
 			Enumeration<String> strings = likelihoodTable.keys();
 			while(strings.hasMoreElements()){
