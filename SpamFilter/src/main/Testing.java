@@ -36,8 +36,8 @@ public class Testing {
 		
 		m = mValue;
 		k = kValue;
-		String spamTrainingResultsFileNameFull = "SPAM m=" + m + TRAINING_RESULTS_FILE_NAME_SUFFIX;
-		String hamTrainingResultsFileNameFull = "HAM m=" + m + TRAINING_RESULTS_FILE_NAME_SUFFIX;
+		String spamTrainingResultsFileNameFull = "SPAM k=" + k + " m=" + m + TRAINING_RESULTS_FILE_NAME_SUFFIX;
+		String hamTrainingResultsFileNameFull = "HAM k=" + k + " m=" + m + TRAINING_RESULTS_FILE_NAME_SUFFIX;
 		spamPriorLikelihoodLog = Math.log(spamPrior);
 		hamPriorLikelihoodLog = Math.log(hamPrior);
 		populateTable(spamTrainingResultsFileNameFull, "SPAM");
@@ -61,13 +61,11 @@ public class Testing {
 		if(emailType.equalsIgnoreCase("HAM")){
 			totalWordCount = fileScanner.nextLong();
 			lexiconSize = fileScanner.nextLong();
-//			hamDefaultLikelihoodLog = Math.log((double)m/(hamTotalWordCount + hamLexiconSize*m));
 			currentTable = hamLogTable;
 		}
 		else{
 			totalWordCount = fileScanner.nextLong();
 			lexiconSize = fileScanner.nextLong();
-//			spamDefaultLikelihoodLog = Math.log((double)m/(spamTotalWordCount + spamLexiconSize*m));
 			currentTable = spamLogTable;
 		}
 		while(fileScanner.hasNext()){
@@ -90,15 +88,9 @@ public class Testing {
 			if(hamLikelihood != null){
 				hamPosterior += hamLikelihood.doubleValue();
 			}
-//			else{
-//				hamPosterior += hamDefaultLikelihoodLog;
-//			}
 			if(spamLikelihood != null){
 				spamPosterior += spamLikelihood.doubleValue();
 			}
-//			else{
-//				spamPosterior += spamDefaultLikelihoodLog;
-//			}
 		}
 		if(hamPosterior >= spamPosterior){
 			classifiedEmails.add(new ClassifiedEmail(email.getName(), "HAM", spamPosterior, hamPosterior));
@@ -114,13 +106,13 @@ public class Testing {
 		}
 		emailScanner.close();
 	}
-	
+	//Creates the output file of the testing results
 	private static void createResultsFile(){
 		try {
 			String outputFileName = testFileClass.toUpperCase() + " k=" + k + " m=" + m + " TestingResults.txt";
 			PrintWriter writer = new PrintWriter(outputFileName, "UTF-8");
-			System.out.println("With k=" + k + " and m=" + m);
-			System.out.println("fraction of emails correctly classified as " + testFileClass + ": " + correctlyClassifiedCount/numberOfTestFiles);
+//			System.out.println("With k=" + k + " and m=" + m);
+//			System.out.println("fraction of emails correctly classified as " + testFileClass + ": " + correctlyClassifiedCount/numberOfTestFiles);
 			writer.println("With k=" + k + " and m=" + m);
 			writer.println("fraction of emails correctly classified as " + testFileClass + ": " + correctlyClassifiedCount/numberOfTestFiles);
 			for(int i = 0; i < numberOfTestFiles; i++){
