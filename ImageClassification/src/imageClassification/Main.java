@@ -8,6 +8,10 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
+import libsvm.svm;
+import libsvm.svm_parameter;
+import libsvm.svm_problem;
+
 import org.imgscalr.Scalr;
 
 public class Main {
@@ -21,7 +25,17 @@ public class Main {
 			System.out.println("Error");
 		}	
 		System.out.println("Hi");
-
+		int[] vec = makeVector(img);
+		svm_parameter param = new svm_parameter();
+		param.kernel_type = svm_parameter.LINEAR;//Linear kernal
+		param.svm_type = svm_parameter.ONE_CLASS;
+		param.C = 1;
+//		svm.train();
+		
+		svm_problem problem = new svm_problem();
+		problem.
+		
+		
 	}
 	
 	public static int getRed(int color){
@@ -60,7 +74,8 @@ public class Main {
 	public static int[] makeVector(BufferedImage img){
 		int[] vector = new int[3072];
 		
-		BufferedImage scaledImage = Scalr.resize(img, 32);
+		BufferedImage scaledImage = Scalr.resize(img, 32);//Uses the ImgScalr library to achieve this task
+		
 		for(int y = 0; y < 32; y++){
 			for(int x = 0; x < 32; x++){
 				int pix = scaledImage.getRGB(x, y);
