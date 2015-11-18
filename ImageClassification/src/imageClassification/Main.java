@@ -33,7 +33,7 @@ public class Main {
 //		svm.train();
 		
 		svm_problem problem = new svm_problem();
-		problem.
+//		problem.
 		
 		
 	}
