@@ -27,7 +27,7 @@ public class Main {
 		System.out.println("Hi");
 		int[] vec = makeVector(img);
 		System.out.println(vec.toString());
-		float[][][] histogram = makeHistogram(img);
+		float[] histogram = makeHistogram(img);
 		System.out.println(histogram.toString());
 		svm_parameter param = new svm_parameter();
 		param.kernel_type = svm_parameter.LINEAR;//Linear kernel
@@ -51,23 +51,23 @@ public class Main {
 		return color & 0xFF;
 	}
 	
-	public static float[][][] makeHistogram(BufferedImage img){
-		int RGBBuckets[][][] = new int[8][8][8];
-		float RGBFloat[][][] = new float[8][8][8];
+	public static float[] makeHistogram(BufferedImage img){
+		int RGBBuckets[] = new int[8*8*8];
+		float RGBFloat[] = new float[8*8*8];
 		
 		for(int x = 0; x < img.getWidth(); x++){
 			for(int y = 0; y < img.getHeight(); y++){
-				int pix = img.getRGB(x, y);
-				int red = getRed(pix)/32;
-				int green = getGreen(pix)/32;
-				int blue = getBlue(pix)/32;
-				RGBBuckets[red][green][blue]++;
+				int pixel = img.getRGB(x, y);
+				int red = getRed(pixel)/32;
+				int green = getGreen(pixel)/32;
+				int blue = getBlue(pixel)/32;
+				RGBBuckets[red + 8*green + 64*blue]++;
 			}
 		}
 		for(int r = 0; r < 8; r++){
 			for(int g = 0; g < 8; g++){
 				for(int b = 0; b < 8; b++){
-					RGBFloat[r][g][b] = ((float)RGBBuckets[r][g][b])/(img.getWidth()*img.getHeight());
+					RGBFloat[r+ 8*g + 64*b] = ((float)RGBBuckets[r + 8*g + 64*b])/(img.getWidth()*img.getHeight());
 				}
 			}
 		}
@@ -81,13 +81,13 @@ public class Main {
 		
 		for(int y = 0; y < 32; y++){
 			for(int x = 0; x < 32; x++){
-				int pix = scaledImage.getRGB(x, y);
-				int red = getRed(pix);
-				int green = getGreen(pix);
-				int blue = getBlue(pix);
-				vector[y*32 + 3*x] = red;
-				vector[y*32 + 3*x + 1] = green;
-				vector[y*32 + 3*x + 2] = blue;
+				int pixel = scaledImage.getRGB(x, y);
+				int red = getRed(pixel);
+				int green = getGreen(pixel);
+				int blue = getBlue(pixel);
+				vector[y*96 + 3*x] = red;
+				vector[y*96 + 3*x + 1] = green;
+				vector[y*96 + 3*x + 2] = blue;
 			}
 		}
 		
