@@ -9,6 +9,7 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 import libsvm.svm;
+import libsvm.svm_node;
 import libsvm.svm_parameter;
 import libsvm.svm_problem;
 
@@ -37,7 +38,17 @@ public class Main {
 		
 		svm_problem problem = new svm_problem();
 //		problem.
-		
+		int numberOfPictures = 0;
+		for(int i = 0; i < numberOfPictures; i++){
+			problem.x[i] = new svm_node[3072];
+			problem.y[i] = 1;//1 if nodes in i are in class, 0 if nodes are not in class
+			for(int j = 0; j < 3072; j++){
+				svm_node n = new svm_node();
+				n.index = j+1;
+				n.value = vec[j];
+				problem.x[i][j] = n;
+			}
+		}
 		
 	}
 	
