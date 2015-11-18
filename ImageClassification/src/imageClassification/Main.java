@@ -19,15 +19,18 @@ public class Main {
 	public static void main(String[] args) {
 		BufferedImage img = null;
 		try {
-			File f = new File("images/img_bags_clutch_272.jpg");
+			File f = new File("images/trainingSet/img_bags_clutch_272.jpg");
 		    img = ImageIO.read(f);
 		} catch (IOException e) {
 			System.out.println("Error");
 		}	
 		System.out.println("Hi");
 		int[] vec = makeVector(img);
+		System.out.println(vec.toString());
+		float[][][] histogram = makeHistogram(img);
+		System.out.println(histogram.toString());
 		svm_parameter param = new svm_parameter();
-		param.kernel_type = svm_parameter.LINEAR;//Linear kernal
+		param.kernel_type = svm_parameter.LINEAR;//Linear kernel
 		param.svm_type = svm_parameter.ONE_CLASS;
 		param.C = 1;
 //		svm.train();
