@@ -41,7 +41,8 @@ public class Main {
 		svm_problem problem = new svm_problem();
 //		problem.
 		for(int i = 0; i < numberOfPictures; i++){
-			int[] vec = makeVector(img[i]);
+			img = ImageIO.read(imageFiles[i]);
+			int[] vec = makeVector(img);
 			problem.x[i] = new svm_node[3072];
 			problem.y[i] = 1;//1 if nodes in i are in class, 0 if nodes are not in class
 			for(int j = 0; j < 3072; j++){
