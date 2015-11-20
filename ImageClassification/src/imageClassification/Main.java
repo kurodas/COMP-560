@@ -26,7 +26,9 @@ public class Main {
 			System.out.println("Error");
 		}	
 		System.out.println("Hi");
-		int[] vec = makeVector(img);
+		int numberOfPictures = 0;
+		//int[][] vec = new int[numberOfPictures][30]; 
+				//makeVector(img);
 		System.out.println(vec.toString());
 		float[] histogram = makeHistogram(img);
 		System.out.println(histogram.toString());
@@ -38,14 +40,14 @@ public class Main {
 		
 		svm_problem problem = new svm_problem();
 //		problem.
-		int numberOfPictures = 0;
 		for(int i = 0; i < numberOfPictures; i++){
+			int[] vec = makeVector(img[i]);
 			problem.x[i] = new svm_node[3072];
 			problem.y[i] = 1;//1 if nodes in i are in class, 0 if nodes are not in class
 			for(int j = 0; j < 3072; j++){
 				svm_node n = new svm_node();
 				n.index = j+1;
-				n.value = vec[j];
+				n.value = vec[i][j];
 				problem.x[i][j] = n;
 			}
 		}
