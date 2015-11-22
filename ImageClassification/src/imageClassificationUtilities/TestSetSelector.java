@@ -22,22 +22,43 @@ public class TestSetSelector {
 			//Randomize the order of the images
 			Collections.shuffle(images);
 			int trainingSetSize = (int) (numberOfImages * 0.7);
+			int tuningSetSize = (int) (trainingSetSize * 0.5);
 			
 			for(int i = 0; i<numberOfImages; i++){
 				//Ignore directories
 				if(!images.get(i).isDirectory()){
-					//Move the first trainingSetSize images to the training set
-					if(i < trainingSetSize){
-						File currentImage = images.get(i);
-						currentImage.renameTo(new File("images/trainingSet/" + currentImage.getName()));
+					//Move the first tuningSetSize images to the training set
+					File currentImage = images.get(i);
+					String imageClass = getImageClass(currentImage.getName());
+					if(i < tuningSetSize){
+						currentImage.renameTo(new File("images/tuningSet/"+ imageClass + "/" + currentImage.getName()));
+					}
+					//Move next tuningSetSize images to the training set
+					else if(i < trainingSetSize){
+						currentImage.renameTo(new File("images/trainingSet/"+ imageClass + "/" + currentImage.getName()));
 					}
 					//Move the remaining images to the test set
 					else{
-						File currentImage = images.get(i);
-						currentImage.renameTo(new File("images/testSet/" + currentImage.getName()));
+						currentImage.renameTo(new File("images/testSet/" + imageClass + "/" + currentImage.getName()));
 					}
 				}
 			}
 		}
+	}
+	
+	private static String getImageClass(String imageName){
+		if(imageName.contains("clutch")){
+			return "clutchBags";
+		}
+		else if(imageName.contains("flats")){
+			return "flatShoes";
+		}
+		else if(imageName.contains("hobo")){
+			return "hoboBags";
+		}
+		else if(imageName.contains("pumps")){
+			return "pumpShoes";
+		}
+		return null;
 	}
 }
