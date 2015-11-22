@@ -9,6 +9,7 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 import libsvm.svm;
+import libsvm.svm_model;
 import libsvm.svm_node;
 import libsvm.svm_parameter;
 import libsvm.svm_problem;
@@ -17,7 +18,7 @@ import org.imgscalr.Scalr;
 
 public class Main {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
 		BufferedImage img = null;
 		try {
 			File f = new File("images/trainingSet/img_bags_clutch_272.jpg");
@@ -29,32 +30,115 @@ public class Main {
 		int numberOfPictures = 0;
 		//int[][] vec = new int[numberOfPictures][30]; 
 				//makeVector(img);
-		System.out.println(vec.toString());
-		float[] histogram = makeHistogram(img);
-		System.out.println(histogram.toString());
+//		System.out.println(vec.toString());
+//		float[] histogram = makeHistogram(img);
+//		System.out.println(histogram.toString());
 		svm_parameter param = new svm_parameter();
 		param.kernel_type = svm_parameter.LINEAR;//Linear kernel
-		param.svm_type = svm_parameter.ONE_CLASS;
+//		param.svm_type = svm_parameter.ONE_CLASS;
 		param.C = 1;
+	    param.probability = 1;
+	    param.gamma = 0.5;
+	    param.nu = 0.5;
+	    param.C = 1;
+	    param.svm_type = svm_parameter.C_SVC;
+	    param.kernel_type = svm_parameter.LINEAR;       
+	    param.cache_size = 20000;
+	    param.eps = 0.001;  
 //		svm.train();
 		
 		svm_problem problem = new svm_problem();
-//		problem.
-		for(int i = 0; i < numberOfPictures; i++){
-			img = ImageIO.read(imageFiles[i]);
-			int[] vec = makeVector(img);
-			problem.x[i] = new svm_node[3072];
-			problem.y[i] = 1;//1 if nodes in i are in class, 0 if nodes are not in class
-			for(int j = 0; j < 3072; j++){
-				svm_node n = new svm_node();
-				n.index = j+1;
-				n.value = vec[i][j];
-				problem.x[i][j] = n;
-			}
-		}
+		
+		File clutchDir = new File("images/trainingSet/clutchBags");
+		int clutchLen = clutchDir.listFiles().length;
+		
+		File flatDir = new File("images/trainingSet/flatShoes");
+		int flatLen = flatDir.listFiles().length;
+		
+		File hoboDir = new File("images/trainingSet/hoboBags");
+		int hoboLen = hoboDir.listFiles().length;
+		
+		File pumpDir = new File("images/trainingSet/pumbShoes");
+		int pumpLen = pumpDir.listFiles().length;
+		
+		File[] dirArray = {clutchDir, flatDir, hoboDir, pumpDir};
+		int numPics = clutchLen + flatLen + hoboLen + pumpLen;
+		
+		
+	    problem.y = new double[numPics];
+	    problem.l = numPics;
+	    problem.x = new svm_node[numPics][];     
+		
+	    int idx = 0;
+	    for(File dir : dirArray){
+	    	File[] fileArray = dir.listFiles();
+	    	for(int i = 0; i < fileArray.length; i++){
+	    		img = ImageIO.read(fileArray[i]);
+				int[] vec = makeVector(img);
+				problem.x[i+idx] = makeArrayOfNodes(vec);
+	    	}
+	    	idx += fileArray.length;
+	    }
+	    
+	    for(int i = 0; i < clutchLen; i++){
+	    	problem.y[i] = 1;
+	    }
+	    svm_model clutchModel = svm.svm_train(problem, param);
+	    for(int i = 0; i < clutchLen + flatLen; i++){
+	    	
+	    }
+	    
+	    
+/*	    for(int i = 0; i < clutchTrainingPics.length; i++){
+//			img = ImageIO.read(clutchTrainingPics[i]);
+//			int[] vec = makeVector(img);
+//			problem.x[i] = new svm_node[3072];
+//			problem.y[i] = 1;//1 if nodes in i are in class, 0 if nodes are not in class
+//			for(int j = 0; j < 3072; j++){
+//				svm_node n = new svm_node();
+//				n.index = j+1;
+//				n.value = vec[j];
+//				problem.x[i][j] = n;
+//			}
+//		}
+	    for(int i = 0; i < flatTrainingPics.length; i++){
+	    	img = ImageIO.read(flatTrainingPics[i]);
+	    	int[] vec =  makeVector(img);
+	    	problem.x[i+clutchTrainingPics.length] = new svm_node[3072];
+	    	problem.y[i+clutchTrainingPics.length] = 0;
+	    	for(int j = 0; j < 3072; j++){
+	    		svm_node n = new svm_node();
+	    		n.index = j+1;
+	    		n.value = vec[j];
+	    		problem.x[i+clutchTrainingPics.length][j] = n;
+	    	}
+	    }*/
+		
+		svm_model model = svm.svm_train(problem, param);
+		
+//		img = ImageIO.read(new File("images/testSet/img_bags_clutch_104.jpg"));
+		int[] vec = makeVector(img);
+		svm_node[] nodes = makeArrayOfNodes(vec);
+		
+		double[] prob_estimates = new double[2];
+	    double v = svm.svm_predict_probability(model, nodes, prob_estimates);
+	    System.out.println(prob_estimates[0]);
+	    System.out.println(prob_estimates[1]);
+	    System.out.println(v);    
 		
 	}
 	
+	public static svm_node[] makeArrayOfNodes(int[] vec){
+		svm_node[] nodes = new svm_node[vec.length];
+	    for (int i = 0; i < vec.length; i++){
+	        svm_node node = new svm_node();
+	        node.index = i + 1;
+	        node.value = vec[i];
+
+	        nodes[i] = node;
+	    }
+	    return nodes;
+	}
 	public static int getRed(int color){
 		return (color >>> 16) & 0xFF;
 	}
