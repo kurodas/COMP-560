@@ -84,10 +84,30 @@ public class Main {
 	    	problem.y[i] = 1;
 	    }
 	    svm_model clutchModel = svm.svm_train(problem, param);
-	    for(int i = 0; i < clutchLen + flatLen; i++){
-	    	
-	    }
 	    
+	    for(int i = 0; i < clutchLen; i++){
+	    	problem.y[i] = 0;
+	    }
+	    for(int i = clutchLen; i < clutchLen + flatLen; i++){
+	    	problem.y[i] = 1;
+	    }
+	    svm_model flatModel = svm.svm_train(problem, param);
+	    
+	    for(int i = clutchLen; i < clutchLen + flatLen; i++){
+	    	problem.y[i] = 0;
+	    }
+	    for(int i = clutchLen + flatLen; i < clutchLen + flatLen + hoboLen; i++){
+	    	problem.y[i] = 1;
+	    }
+	    svm_model hoboModel = svm.svm_train(problem, param);
+	    
+	    for(int i = clutchLen + flatLen; i < clutchLen + flatLen + hoboLen; i++){
+	    	problem.y[i] = 0;
+	    }
+	    for(int i = clutchLen + flatLen + hoboLen; i < numPics; i++){
+	    	problem.y[i] = 1;
+	    }
+	    svm_model pumpModel = svm.svm_train(problem, param);
 	    
 /*	    for(int i = 0; i < clutchTrainingPics.length; i++){
 //			img = ImageIO.read(clutchTrainingPics[i]);
