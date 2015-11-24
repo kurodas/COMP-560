@@ -4,9 +4,6 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 /**
- * Divides image files into test set and training set
- * Images must be restored to "image" directory if
- * redividing for whatever reason.
  * @author skuroda
  *
  */
@@ -14,6 +11,7 @@ public class TestSetSelector {
 	public static void main(String[] args){
 		File imageDirectory = new File("images");
 		if(imageDirectory.isDirectory()){
+			resetSets(imageDirectory);
 			int numberOfImages = imageDirectory.listFiles().length;
 			ArrayList<File> images = new ArrayList<File>(numberOfImages);
 			for(File image: imageDirectory.listFiles()){
@@ -22,7 +20,6 @@ public class TestSetSelector {
 			//Randomize the order of the images
 			Collections.shuffle(images);
 			int trainingSetSize = (int) (numberOfImages * 0.7);
-			int tuningSetSize = (int) (trainingSetSize * 0.5);
 			
 			for(int i = 0; i<numberOfImages; i++){
 				//Ignore directories
@@ -30,11 +27,8 @@ public class TestSetSelector {
 					//Move the first tuningSetSize images to the training set
 					File currentImage = images.get(i);
 					String imageClass = getImageClass(currentImage.getName());
-					if(i < tuningSetSize){
-						currentImage.renameTo(new File("images/tuningSet/"+ imageClass + "/" + currentImage.getName()));
-					}
-					//Move next tuningSetSize images to the training set
-					else if(i < trainingSetSize){
+					//Move first images to the training set
+					if(i < trainingSetSize){
 						currentImage.renameTo(new File("images/trainingSet/"+ imageClass + "/" + currentImage.getName()));
 					}
 					//Move the remaining images to the test set
@@ -43,6 +37,11 @@ public class TestSetSelector {
 					}
 				}
 			}
+			File trainingDirectory = new File("images/trainingSet/");
+			File[] imageClassDirectories = trainingDirectory.listFiles();
+			for(int i = 0; i < imageClassDirectories.length; i++){
+				splitImageClass(imageClassDirectories[i]);
+			}
 		}
 	}
 	
@@ -50,15 +49,45 @@ public class TestSetSelector {
 		if(imageName.contains("clutch")){
 			return "clutchBags";
 		}
-		else if(imageName.contains("flats")){
+		else if(imageName.contains("flat")){
 			return "flatShoes";
 		}
 		else if(imageName.contains("hobo")){
 			return "hoboBags";
 		}
-		else if(imageName.contains("pumps")){
+		else if(imageName.contains("pump")){
 			return "pumpShoes";
 		}
 		return null;
+	}
+	
+	private static void resetSets(File directory){
+		File[] filesInDirectory = directory.listFiles();
+		for(int i = 0; i < filesInDirectory.length; i++){
+			File currentFile = filesInDirectory[i];
+			if(!currentFile.isDirectory()){
+				currentFile.renameTo(new File("images/" + currentFile.getName()));
+			}
+			else{
+				resetSets(currentFile);
+			}
+		}
+	}
+	
+	private static void splitImageClass(File classDirectory){
+		File[] classImages = classDirectory.listFiles();
+		String className = getImageClass(classDirectory.getName());
+		for(int i = 0; i < classImages.length; i++){
+			File currentImage = classImages[i];
+			//Ignore directories
+			if(!currentImage.isDirectory()){
+				if(i<classImages.length * 0.5){
+					currentImage.renameTo(new File("images/trainingSet/"+ className+"/tuningSet/"+currentImage.getName()));
+				}
+				else{
+					currentImage.renameTo(new File("images/trainingSet/"+ className+"/trainingSet/"+currentImage.getName()));
+				}
+			}
+		}
 	}
 }
