@@ -25,9 +25,11 @@ public class Main {
 		    img = ImageIO.read(f);
 		} catch (IOException e) {
 			System.out.println("Error");
-		}	
+		}
+		File testDir = new File("images/testSet");
+		File[] testFiles = testDir.listFiles();
 		
-		BufferedImage img1 = ImageIO.read(new File("images/testSet/img_bags_clutch_104.jpg"));
+/*		BufferedImage img1 = ImageIO.read(new File("images/testSet/img_bags_clutch_104.jpg"));
 		BufferedImage img2 = ImageIO.read(new File("images/testSet/img_bags_clutch_152.jpg"));
 		BufferedImage img3 = ImageIO.read(new File("images/testSet/img_bags_hobo_386.jpg"));
 		BufferedImage img4 = ImageIO.read(new File("images/testSet/img_bags_hobo_390.jpg"));
@@ -36,23 +38,27 @@ public class Main {
 		BufferedImage img7 = ImageIO.read(new File("images/testSet/img_womens_pumps_275.jpg"));
 		BufferedImage img8 = ImageIO.read(new File("images/testSet/img_womens_pumps_289.jpg"));
 		BufferedImage[] testImages = {img1, img2, img3, img4, img5, img6, img7, img8};
-		
+		*/
 		System.out.println("Hi");
 //		int numberOfPictures = 0;
 		//int[][] vec = new int[numberOfPictures][30]; 
-				//makeVector(img);
+				//makeVector(img);-
 //		System.out.println(vec.toString());
 //		float[] histogram = makeHistogram(img);
 //		System.out.println(histogram.toString());
 		svm_parameter param = new svm_parameter();
-		param.kernel_type = svm_parameter.LINEAR;//Linear kernel
+		param.kernel_type = svm_parameter.LINEAR;
 //		param.svm_type = svm_parameter.ONE_CLASS;
-		param.C = 1;
+		param.svm_type = svm_parameter.C_SVC;
+		param.C = 5;
 	    param.probability = 1;
-	    param.gamma = 0.5;
-	    param.nu = 0.5;
-	    param.C = 1;
-	    param.svm_type = svm_parameter.C_SVC;
+//	    param.gamma = 0.5;
+//	    param.nu = 0.5;
+//	    param.C = 1;
+	    
+//	    param.svm_type = svm_parameter.C_SVC;
+//	    param.svm_type = svm_parameter.ONE_CLASS;
+	    
 	    param.kernel_type = svm_parameter.LINEAR;       
 	    param.cache_size = 20000;
 	    param.eps = 0.001;  
@@ -70,6 +76,7 @@ public class Main {
 		int hoboLen = hoboDir.listFiles().length;
 		
 		File pumpDir = new File("images/trainingSet/pumpShoes");
+
 		int pumpLen = pumpDir.listFiles().length;
 		
 		File[] dirArray = {clutchDir, flatDir, hoboDir, pumpDir};
@@ -81,15 +88,21 @@ public class Main {
 	    problem.x = new svm_node[numPics][];     
 		
 	    int idx = 0;
+//	    svm_node[][] picturesNodes = new svm_node[numPics][]; 
 	    for(File dir : dirArray){
 	    	File[] fileArray = dir.listFiles();
 	    	for(int i = 0; i < fileArray.length; i++){
 	    		img = ImageIO.read(fileArray[i]);
 				int[] vec = makeVector(img);
+//				float[] vec = makeHistogram(img);
 				problem.x[i+idx] = makeArrayOfNodes(vec);
 	    	}
 	    	idx += fileArray.length;
 	    }
+	    for(int i = 0; i < numPics; i++){
+	    	problem.y[i] = 0;
+	    }
+	    
 	    
 	    for(int i = 0; i < clutchLen; i++){
 	    	problem.y[i] = 1;
@@ -144,30 +157,50 @@ public class Main {
 	    		problem.x[i+clutchTrainingPics.length][j] = n;
 	    	}
 	    }*/
-		
+//		clutchModel.param.C = 
 //		svm_model model = svm.svm_train(problem, param);
-		
-		for(BufferedImage tmpImg : testImages){
+
+		for(File dir : testFiles){
+		for(File f : dir.listFiles()){
+			
+			System.out.println(f.getName());
+			BufferedImage tmpImg = ImageIO.read(f);
 			int[] vec = makeVector(tmpImg);
 			svm_node[] nodes = makeArrayOfNodes(vec);
 			
 			double[] prob_estimates = new double[2];
 		    svm.svm_predict_probability(clutchModel, nodes, prob_estimates);
-		    double clutchProb = prob_estimates[1];
+		    double clutchProb = prob_estimates[0];
 		    svm.svm_predict_probability(flatModel, nodes, prob_estimates);
-		    double flatProb = prob_estimates[1];
+		    double flatProb = prob_estimates[0];
 		    svm.svm_predict_probability(hoboModel, nodes, prob_estimates);
-		    double hoboProb = prob_estimates[1];
+		    double hoboProb = prob_estimates[0];
 		    svm.svm_predict_probability(pumpModel, nodes, prob_estimates);
-		    double pumpProb = prob_estimates[1];
-		    System.out.println();
-		    System.out.println("NEW IMAGE");
+		    double pumpProb = prob_estimates[0];
+
+//		    System.out.println("NEW IMAGE");
 		    System.out.println("Clutch Prob " + clutchProb);
 		    System.out.println("Flat Prob " + flatProb);
 		    System.out.println("Hobo Prob " + hoboProb);
 		    System.out.println("Pump Prob " + pumpProb);
+		    System.out.println();
+		    
+			}	
 		}
 	}	
+	
+	private static svm_node[] makeArrayOfNodes(float[] vec) {
+		svm_node[] nodes = new svm_node[vec.length];
+	    for (int i = 0; i < vec.length; i++){
+	        svm_node node = new svm_node();
+	        node.index = i + 1;
+	        node.value = vec[i];
+
+	        nodes[i] = node;
+	    }
+	    return nodes;
+	}
+	
 	public static svm_node[] makeArrayOfNodes(int[] vec){
 		svm_node[] nodes = new svm_node[vec.length];
 	    for (int i = 0; i < vec.length; i++){
@@ -179,6 +212,22 @@ public class Main {
 	    }
 	    return nodes;
 	}
+	
+	public static int getMaxIdx(double a, double b, double c, double d){
+		if(a > b && a > c && a > d){
+			return 0;
+		}
+		else if(b > c && b > d){
+			return 1;
+		}
+		else if(c > d){
+			return 2;
+		}
+		else{
+			return 3;
+		}
+	}
+	
 	public static int getRed(int color){
 		return (color >>> 16) & 0xFF;
 	}
