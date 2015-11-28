@@ -73,56 +73,7 @@ public class Main {
 		
 	}    
 	
-	private static float[] tune(svm_model model, File postiveDir, File[] negitiveDir, boolean isHistogram) throws IOException{
-		float[] retArr = new float[2];
-		int correctCount = 0;
-		for(File imgFile : postiveDir.listFiles()){
-			BufferedImage tmpImg = ImageIO.read(imgFile);
-			svm_node[] nodes;
-			if(isHistogram){
-				float[] vec = makeHistogram(tmpImg);
-				nodes = makeArrayOfNodes(vec);	
-			}
-			else{
-				int[] vec = makeVector(tmpImg);
-				nodes = makeArrayOfNodes(vec);
-			}
-			
-			double[] prob_estimates = new double[2];
-		    correctCount+= svm.svm_predict_probability(model, nodes, prob_estimates);
-		    int a = 0;
-		    //if(values[i] != prob_estimates[1]){
-		    //	System.out.println(values[i] + " " + prob_estimates[1]);
-		}
-		
-		int incorrectNegCount = 0;
-		int totalNeg = 0;
-		for(File negDir : negitiveDir){
-			totalNeg += negDir.listFiles().length;
-			for(File imgFile : negDir.listFiles()){
-				BufferedImage tmpImg = ImageIO.read(imgFile);
-				svm_node[] nodes;
-				if(isHistogram){
-					float[] vec = makeHistogram(tmpImg);
-					nodes = makeArrayOfNodes(vec);	
-				}
-				else{
-					int[] vec = makeVector(tmpImg);
-					nodes = makeArrayOfNodes(vec);
-				}
-			
-				double[] prob_estimates = new double[2];
-				incorrectNegCount += svm.svm_predict_probability(model, nodes, prob_estimates);
-			}
-		}
-		
-		
-		System.out.println("Correctly categorized files " + correctCount + "/" + postiveDir.listFiles().length + "=" +  ((float)correctCount/postiveDir.listFiles().length));
-		retArr[0] = ((float)correctCount/postiveDir.listFiles().length);
-		System.out.println("Incorrectly categorized files " + incorrectNegCount + "/" + totalNeg + "=" +  ((float)incorrectNegCount/totalNeg));
-		retArr[1] = ((float)incorrectNegCount/totalNeg);
-		return retArr;
-	}
+	
 	
 	public static svm_node[] makeArrayOfNodes(float[] vec) {
 		svm_node[] nodes = new svm_node[vec.length];
