@@ -54,16 +54,16 @@ public class Main {
 	public static void main(String[] args) throws IOException{
 		int[] linearVectorCValues = {clutchLinearVectorC, flatLinearVectorC, hoboLinearVectorC, pumpLinearVectorC};
 		double[] zeroGammas = {0,0,0,0};
-		System.out.println("Linear Vector");
-		TestModels.test(linearVectorCValues, zeroGammas, svm_parameter.LINEAR, false);
+//		System.out.println("Linear Vector");
+//		TestModels.test(linearVectorCValues, zeroGammas, svm_parameter.LINEAR, false);
 		int[] linearHistogramCValues = {clutchLinearHistogramC, flatLinearHistogramC, hoboLinearHistogramC, pumpLinearHistogramC};
 		System.out.println("Linear Histogram");
-		TestModels.test(linearHistogramCValues, zeroGammas, svm_parameter.LINEAR, true);
-		int[] RBFVectorCValues = {clutchRBFVectorC, flatRBFVectorC, hoboRBFVectorC, pumpRBFVectorC};
-		double[] RBFVectorGammaValues = {clutchRBFVectorGamma, flatRBFVectorGamma, hoboRBFVectorGamma, pumpRBFVectorGamma};
-		System.out.println("RBF Vector");
-		TestModels.test(RBFVectorCValues, RBFVectorGammaValues, svm_parameter.RBF, false);
-	
+//		TestModels.test(linearHistogramCValues, zeroGammas, svm_parameter.LINEAR, true);
+//		int[] RBFVectorCValues = {clutchRBFVectorC, flatRBFVectorC, hoboRBFVectorC, pumpRBFVectorC};
+//		double[] RBFVectorGammaValues = {clutchRBFVectorGamma, flatRBFVectorGamma, hoboRBFVectorGamma, pumpRBFVectorGamma};
+//		System.out.println("RBF Vector");
+//		TestModels.test(RBFVectorCValues, RBFVectorGammaValues, svm_parameter.RBF, false);
+//	
 		int[] RBFHistogramCValues = {clutchRBFHistogramC, flatRBFHistogramC, hoboRBFHistogramC, pumpRBFHistogramC};
 		double[] RBFHistogramGammaValues = {clutchRBFHistogramGamma, flatRBFHistogramGamma, hoboRBFHistogramGamma, pumpRBFHistogramGamma};
 		System.out.println("RBF Histogram");

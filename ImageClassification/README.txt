@@ -4,7 +4,9 @@ In the main package we have the following methods
 MakeVector - Which takes as an input a BufferedImage and returns an array of integers of length 3072. The array is a vector representation of a 32X32 red, green, and blue pixel values.
 To perform the conversion of the BufferedImage into a 32 X 32 image we use the freely available imgScalr java library.
 
-MakeHistogram - Which takes as an input a BufferedImage and returns an array of floats of length 512.
+MakeHistogram - Which takes as an input a BufferedImage and returns an array of floats of length 512. It does this by dividing the rgb values of each pixel by 32 and getting a bucket value
+between 0 and 7. It then counts each pixel of each bucket value configuration, and divides this count by the total number of pixels. The array indexes of each float are determined by taking
+the red bucket value adding the green bucket * 8 and adding the blue bucket * 64.
 
 The TuneModels.java file expects as an input, a model that you wish to calculate he performance on the tuning set, a String that contains a model "name", with information on which class the model represents
 whether the model is a linear or RBF model, if it uses Vector or Histogram to represent images, and information on gamma (if the model is of type RBF). An example name

@@ -27,12 +27,7 @@ public class TestModels {
 	static int hoboTestLen = hoboTestDir.listFiles().length;
 	static File pumpTestDir = new File("images/testSet/pumpShoes");
 	static int pumpTestLen = pumpTestDir.listFiles().length;
-	
-    static File clutchTune = new File("images/trainingSet/clutchBags/tuningSet");
-    static File flatTune = new File("images/trainingSet/flatShoes/tuningSet");
-    static File pumpTune = new File("images/trainingSet/pumpShoes/tuningSet");
-    static File hoboTune = new File("images/trainingSet/hoboBags/tuningSet");
-	
+		
 	public static void test(int[] cValues, double[] gammaValues, int parameterType, boolean isHistogram) throws IOException{
 		BufferedImage img = null;
 		svm_parameter param = new svm_parameter();
@@ -48,10 +43,10 @@ public class TestModels {
 		int hoboLen = hoboDir.listFiles().length;
 		int pumpLen = pumpDir.listFiles().length;
 		
-//		File[] dirArray = {clutchDir, flatDir, hoboDir, pumpDir};
 		File[] dirArray = {flatDir, clutchDir, hoboDir, pumpDir};
 		int numPics = clutchLen + flatLen + hoboLen + pumpLen;
-		
+		//The data must be ordered with the flat pictures first, because the way libSVM computes probability indexing is based on which classification is seen first
+		//so we make flat the first classification seen by our clutch model
 		
 	    problem.y = new double[numPics];
 	    problem.l = numPics;
@@ -92,6 +87,9 @@ public class TestModels {
 	    
 	    dirArray[0] = clutchDir;
 	    dirArray[1] = flatDir;
+	    //Once the clutch model is made, we must reorder the data and regenerate the problem information
+	    //for the flat, hobo, and pump models
+	    
 	    
 	    idx = 0;
 	    for(File dir : dirArray){
