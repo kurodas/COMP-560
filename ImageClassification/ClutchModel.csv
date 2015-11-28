@@ -78,5 +78,3 @@ Clutch,Linear/RBF,RBF,Histogram/Vector,Histogram,C,9,G,1,PositveTune,0.17847025,
 Clutch,Linear/RBF,RBF,Histogram/Vector,Histogram,C,9,G,10,PositveTune,0.30028328,NegitiveTunePostive,0.06364513
 Clutch,Linear/RBF,RBF,Histogram/Vector,Histogram,C,9,G,100,PositveTune,0.29745042,NegitiveTunePostive,0.06846673
 Clutch,Linear/RBF,RBF,Histogram/Vector,Histogram,C,9,G,1000,PositveTune,0.09915014,NegitiveTunePostive,0.036644164
-Clutch,Linear/RBF,RBF,Histogram/Vector,Histogram,C,1,G,0.01,PositveTune,0.11898017,NegitiveTunePostive,0.026036644
-Clutch,Linear/RBF,RBF,Histogram/Vector,Histogram,C,2,G,0.01,PositveTune,0.09065156,NegitiveTunePostive,0.015429122

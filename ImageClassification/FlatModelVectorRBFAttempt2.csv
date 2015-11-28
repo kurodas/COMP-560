@@ -1,0 +1,9 @@
+Flat,Linear/RBF,RBF,Histogram/Vector,Vector,C,1,G,3.625815808556925E-8,PositveTune,0.8653295,NegitiveTunePostive,0.05379443
+Flat,Linear/RBF,RBF,Histogram/Vector,Vector,C,10,G,3.625815808556925E-8,PositveTune,0.9312321,NegitiveTunePostive,0.041306436
+Flat,Linear/RBF,RBF,Histogram/Vector,Vector,C,100,G,3.625815808556925E-8,PositveTune,0.9455587,NegitiveTunePostive,0.043227665
+Flat,Linear/RBF,RBF,Histogram/Vector,Vector,C,1,G,3.625815808556925E-7,PositveTune,0.9140401,NegitiveTunePostive,0.05379443
+Flat,Linear/RBF,RBF,Histogram/Vector,Vector,C,10,G,3.625815808556925E-7,PositveTune,0.9312321,NegitiveTunePostive,0.052833814
+Flat,Linear/RBF,RBF,Histogram/Vector,Vector,C,100,G,3.625815808556925E-7,PositveTune,0.9312321,NegitiveTunePostive,0.050912585
+Flat,Linear/RBF,RBF,Histogram/Vector,Vector,C,1,G,3.6258158085569253E-6,PositveTune,0.06017192,NegitiveTunePostive,0.0
+Flat,Linear/RBF,RBF,Histogram/Vector,Vector,C,10,G,3.6258158085569253E-6,PositveTune,0.06303725,NegitiveTunePostive,0.0
+Flat,Linear/RBF,RBF,Histogram/Vector,Vector,C,100,G,3.6258158085569253E-6,PositveTune,0.09169055,NegitiveTunePostive,9.6061477E-4

@@ -1,0 +1,12 @@
+Clutch,Linear/RBF,RBF,Histogram/Vector,Vector,C,1,G,3.625815808556925E-8,PositveTune,0.82152975,NegitiveTunePostive,0.0019286403
+Clutch,Linear/RBF,RBF,Histogram/Vector,Vector,C,10,G,3.625815808556925E-8,PositveTune,0.8668555,NegitiveTunePostive,0.0028929606
+Clutch,Linear/RBF,RBF,Histogram/Vector,Vector,C,100,G,3.625815808556925E-8,PositveTune,0.8668555,NegitiveTunePostive,0.0028929606
+Clutch,Linear/RBF,RBF,Histogram/Vector,Vector,C,1,G,3.625815808556925E-7,PositveTune,0.81869686,NegitiveTunePostive,9.6432015E-4
+Clutch,Linear/RBF,RBF,Histogram/Vector,Vector,C,10,G,3.625815808556925E-7,PositveTune,0.815864,NegitiveTunePostive,0.0019286403
+Clutch,Linear/RBF,RBF,Histogram/Vector,Vector,C,100,G,3.625815808556925E-7,PositveTune,0.82152975,NegitiveTunePostive,0.0019286403
+Clutch,Linear/RBF,RBF,Histogram/Vector,Vector,C,1,G,3.6258158085569253E-6,PositveTune,0.10764872,NegitiveTunePostive,0.0
+Clutch,Linear/RBF,RBF,Histogram/Vector,Vector,C,10,G,3.6258158085569253E-6,PositveTune,0.10764872,NegitiveTunePostive,0.0
+Clutch,Linear/RBF,RBF,Histogram/Vector,Vector,C,100,G,3.6258158085569253E-6,PositveTune,0.10764872,NegitiveTunePostive,0.0
+Clutch,Linear/RBF,RBF,Histogram/Vector,Vector,C,1,G,3.625815808556925E-5,PositveTune,0.019830028,NegitiveTunePostive,0.0
+Clutch,Linear/RBF,RBF,Histogram/Vector,Vector,C,10,G,3.625815808556925E-5,PositveTune,0.019830028,NegitiveTunePostive,0.0
+Clutch,Linear/RBF,RBF,Histogram/Vector,Vector,C,100,G,3.625815808556925E-5,PositveTune,0.019830028,NegitiveTunePostive,0.0
