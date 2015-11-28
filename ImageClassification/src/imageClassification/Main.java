@@ -20,41 +20,68 @@ import org.imgscalr.Scalr;
 
 public class Main {
 
+	static File clutchDir = new File("images/trainingSet/clutchBags/trainingSet");
+	static File flatDir = new File("images/trainingSet/flatShoes/trainingSet");
+	static File hoboDir = new File("images/trainingSet/hoboBags/trainingSet");	
+	static File pumpDir = new File("images/trainingSet/pumpShoes/trainingSet");
+	
+	static File clutchTestDir = new File("images/testSet/clutchBags");
+	static File flatTestDir = new File("images/testSet/flatShoes");
+	static File hoboTestDir = new File("images/testSet/hoboBags");
+	static File pumpTestDir = new File("images/testSet/pumpShoes");
+	
     static File clutchTune = new File("images/trainingSet/clutchBags/tuningSet");
     static File flatTune = new File("images/trainingSet/flatShoes/tuningSet");
     static File pumpTune = new File("images/trainingSet/pumpShoes/tuningSet");
     static File hoboTune = new File("images/trainingSet/hoboBags/tuningSet");
 	
-	public static void main(String[] args) throws IOException{
-		BufferedImage img = null;		
+    static final int clutchLinearHistogramC = 4;
+    static final int flatLinearHistogramC = 1;
+    static final int hoboLinearHistogramC = 8;
+    static final int pumpLinearHistogramC = 1;
+    
+    static final int clutchLinearVectorC = 9;
+    static final int flatLinearVectorC = 4;
+    static final int hoboLinearVectorC = 1;
+    static final int pumpLinearVectorC = 8;
+    
+    static final int clutchRBFHistogramC = 6;
+    static final double clutchRBFHistogramGamma = 100;
+    static final int flatRBFHistogramC = 1;
+    static final double flatRBFHistogramGamma = 100;
+    static final int hoboRBFHistogramC = 2;
+    static final double hoboRBFHistogramGamma = 100;
+    static final int pumpRBFHistogramC = 1;
+    static final double pumpRBFHistogramGamma = 100;
 
+    static final int clutchRBFVectorC = 10;
+    static final double clutchRBFVectorGamma = 0.00000003625815809;
+    static final int flatRBFVectorC = 100;
+    static final double flatRBFVectorGamma = 0.00000003625815809;
+    static final int hoboRBFVectorC = 100;
+    static final double hoboRBFVectorGamma = 0.00000003625815809;
+    static final int pumpRBFVectorC = 100;
+    static final double pumpRBFVectorGamma = 0.00000003625815809;
+    
+    
+	public static void main(String[] args) throws IOException{
+		BufferedImage img = null;
 		svm_parameter param = new svm_parameter();
-		param.kernel_type = svm_parameter.RBF;
+		param.kernel_type = svm_parameter.LINEAR;
 		param.svm_type = svm_parameter.C_SVC;
-		param.C = .01;
 	    param.probability = 1;
-//	    param.shrinking = 0;
 	    param.cache_size = 100000;
 	    param.eps = 0.001;  
-//	    param.eps = 0.01;
 	    
 		svm_problem problem = new svm_problem();
 		
-		File clutchDir = new File("images/trainingSet/clutchBags/trainingSet");
 		int clutchLen = clutchDir.listFiles().length;
-		
-		File flatDir = new File("images/trainingSet/flatShoes/trainingSet");
 		int flatLen = flatDir.listFiles().length;
-		
-		File hoboDir = new File("images/trainingSet/hoboBags/trainingSet");
 		int hoboLen = hoboDir.listFiles().length;
-		
-		File pumpDir = new File("images/trainingSet/pumpShoes/trainingSet");
-
 		int pumpLen = pumpDir.listFiles().length;
 		
-		File[] dirArray = {clutchDir, flatDir, hoboDir, pumpDir};
-//		File[] dirArray = {flatDir, clutchDir, hoboDir, pumpDir};
+//		File[] dirArray = {clutchDir, flatDir, hoboDir, pumpDir};
+		File[] dirArray = {flatDir, clutchDir, hoboDir, pumpDir};
 		int numPics = clutchLen + flatLen + hoboLen + pumpLen;
 		
 		
@@ -62,52 +89,36 @@ public class Main {
 	    problem.l = numPics;
 	    problem.x = new svm_node[numPics][];     
 		
-//	    int idx = 0;
-//	    for(File dir : dirArray){
-//	    	File[] fileArray = dir.listFiles();
-//	    	for(int i = 0; i < fileArray.length; i++){
-//	    		img = ImageIO.read(fileArray[i]);
-//				int[] vec = makeVector(img);
-//////				float[] vec = makeHistogram(img);
-//				problem.x[i+idx] = makeArrayOfNodes(vec);
-//	    	}
-//	    	idx += fileArray.length;
-//	    }
+	    
+	    
+	    int idx = 0;
+	    for(File dir : dirArray){
+	    	File[] fileArray = dir.listFiles();
+	    	for(int i = 0; i < fileArray.length; i++){
+	    		img = ImageIO.read(fileArray[i]);
+				int[] vec = makeVector(img);
+//	    		float[] vec = makeHistogram(img);
+				problem.x[i+idx] = makeArrayOfNodes(vec);
+	    	}
+	    	idx += fileArray.length;
+	    }
+	    
 	    for(int i = 0; i < numPics; i++){
 	    	problem.y[i] = 0;
 	    }
 	    
 	    
-//	    for(int i = flatLen; i < flatLen+clutchLen; i++){
-//	    	problem.y[i] = 1;
-//	    }
+	    for(int i = flatLen; i < flatLen+clutchLen; i++){
+	    	problem.y[i] = 1;
+	    }
 	    
-	    svm_model clutchModel = null;
-	
-	    param.gamma = ((double) 1/(20000*numPics));
-
+	    param.C = clutchLinearVectorC;
+	    svm_model clutchModel = svm.svm_train(problem, param);
 	    
-
-	    System.out.println(param.gamma);
-    
-    	
-//    	DataOutputStream fp = new DataOutputStream(new BufferedOutputStream(new FileOutputStream("ClutchModelVectorRBFAttempt2.csv")));
-//	    for(int G = 1; G < 100; G*= 10){
-//	    	for(int C = 1; C < 101; C*= 10){
-//		    	param.C = C;
-//		    	param.gamma = ((double) G/(20000*numPics));
-//		    	//param.gamma = gamma;
-//		    	clutchModel = svm.svm_train(problem,param);
-//		    	String str = "clutchModelRBFHistogramC="+C+"G="+param.gamma;
-//		    	reportTuneData(clutchModel, str, fp);
-////		    	tune(clutchModel, clutchTune, neg, false);
-//	    }
-//	  }
-//	  fp.close();
-    	
-    	
-	    int idx = 0;
-//	    svm_node[][] picturesNodes = new svm_node[numPics][]; 
+	    dirArray[0] = clutchDir;
+	    dirArray[1] = flatDir;
+	    
+	    idx = 0;
 	    for(File dir : dirArray){
 	    	File[] fileArray = dir.listFiles();
 	    	for(int i = 0; i < fileArray.length; i++){
@@ -129,22 +140,9 @@ public class Main {
 	    	problem.y[i] = 1;
 	    }
 	    
-	    svm_model flatModel = null;//svm.svm_train(problem, param);
-	    
-    	DataOutputStream fp = new DataOutputStream(new BufferedOutputStream(new FileOutputStream("FlatModelVectorRBFAttempt2.csv")));
-	    for(int G = 1; G < 1000; G*= 10){
-	    	for(int C = 1; C < 101; C*= 10){
-		    	param.C = C;
-		    	param.gamma = ((double) G/(20000*numPics));
-		    	//param.gamma = gamma;
-		    	clutchModel = svm.svm_train(problem,param);
-		    	String str = "flatModelRBFVectorC="+C+"G="+param.gamma;
-		    	reportTuneData(clutchModel, str, fp);
-//		    	tune(clutchModel, clutchTune, neg, false);
-	    }
-	  }
-	  fp.close();
-	    
+	    param.C = flatLinearVectorC;
+	    svm_model flatModel = svm.svm_train(problem, param);
+
 	    for(int i = clutchLen; i < clutchLen + flatLen; i++){
 	    	problem.y[i] = 0;
 	    }
@@ -152,22 +150,9 @@ public class Main {
 	    	problem.y[i] = 1;
 	    }
 	    
-//	    svm_model hoboModel = null;//svm.svm_train(problem, param);
-	    fp = new DataOutputStream(new BufferedOutputStream(new FileOutputStream("HoboModelVectorRBFAttempt2.csv")));
-	    for(int G = 1; G < 1000; G*= 10){
-	    	for(int C = 1; C < 101; C*= 10){
-		    	param.C = C;
-		    	param.gamma = ((double) G/(20000*numPics));
-		    	//param.gamma = gamma;
-		    	clutchModel = svm.svm_train(problem,param);
-		    	String str = "hoboModelRBFVectorC="+C+"G="+param.gamma;
-		    	reportTuneData(clutchModel, str, fp);
-//		    	tune(clutchModel, clutchTune, neg, false);
-	    }
-	  }
-	  fp.close();
-	    
-	    
+	    param.C = hoboLinearVectorC;
+	    svm_model hoboModel = svm.svm_train(problem, param);
+
 	    for(int i = clutchLen + flatLen; i < clutchLen + flatLen + hoboLen; i++){
 	    	problem.y[i] = 0;
 	    }
@@ -175,124 +160,11 @@ public class Main {
 	    	problem.y[i] = 1;
 	    }
 	    
-//	    svm_model pumpModel = null;//svm.svm_train(problem, param);
-	    fp = new DataOutputStream(new BufferedOutputStream(new FileOutputStream("PumpModelVectorRBFAttempt2.csv")));
-	    for(int G = 1; G < 1000; G*= 10){
-	    	for(int C = 1; C < 101; C*= 10){
-		    	param.C = C;
-		    	param.gamma = ((double) G/(20000*numPics));
-		    	//param.gamma = gamma;
-		    	clutchModel = svm.svm_train(problem,param);
-		    	String str = "pumpModelRBFVectorC="+C+"G="+param.gamma;
-		    	reportTuneData(clutchModel, str, fp);
-//		    	tune(clutchModel, clutchTune, neg, false);
-	    }
-	  }
-	  fp.close();
-	    
-	    
-	  
-	  
-	  
-	  
-	  
-	  
-//	  
-//	  
-//	  
-//	  
-//	  
-//	  
-//	  
-//	  
-//	  
-//	  
-//	  
-	  
-	    idx = 0;
-//	    svm_node[][] picturesNodes = new svm_node[numPics][]; 
-	    for(File dir : dirArray){
-	    	File[] fileArray = dir.listFiles();
-	    	for(int i = 0; i < fileArray.length; i++){
-	    		img = ImageIO.read(fileArray[i]);
-//				int[] vec = makeVector(img);
-				float[] vec = makeHistogram(img);
-				problem.x[i+idx] = makeArrayOfNodes(vec);
-	    	}
-	    	idx += fileArray.length;
-	    }
+	    param.C = pumpLinearVectorC;
+	    svm_model pumpModel = svm.svm_train(problem, param);
 
-
-	    
-	    
-	    for(int i = 0; i < numPics; i++){
-	    	problem.y[i] = 0;
-	    }
-	    for(int i = clutchLen; i < clutchLen + flatLen; i++){
-	    	problem.y[i] = 1;
-	    }
-	    
-	    fp = new DataOutputStream(new BufferedOutputStream(new FileOutputStream("FlatModelHistogramRBFAttempt2.csv")));
-	    for(int G = 1; G < 1000; G*= 10){
-	    	for(int C = 1; C < 101; C*= 10){
-		    	param.C = C;
-		    	param.gamma = ((double) G/(20000*numPics));
-		    	//param.gamma = gamma;
-		    	clutchModel = svm.svm_train(problem,param);
-		    	String str = "flatModelRBFHistogramC="+C+"G="+param.gamma;
-		    	reportTuneData(clutchModel, str, fp);
-//		    	tune(clutchModel, clutchTune, neg, false);
-	    }
-	  }
-	  fp.close();
-	    
-	    for(int i = clutchLen; i < clutchLen + flatLen; i++){
-	    	problem.y[i] = 0;
-	    }
-	    for(int i = clutchLen + flatLen; i < clutchLen + flatLen + hoboLen; i++){
-	    	problem.y[i] = 1;
-	    }
-	    
-//	    svm_model hoboModel = null;//svm.svm_train(problem, param);
-	    fp = new DataOutputStream(new BufferedOutputStream(new FileOutputStream("HoboModelHistogramRBFAttempt2.csv")));
-	    for(int G = 1; G < 1000; G*= 10){
-	    	for(int C = 1; C < 101; C*= 10){
-		    	param.C = C;
-		    	param.gamma = ((double) G/(20000*numPics));
-		    	//param.gamma = gamma;
-		    	clutchModel = svm.svm_train(problem,param);
-		    	String str = "hoboModelRBFHistogramC="+C+"G="+param.gamma;
-		    	reportTuneData(clutchModel, str, fp);
-//		    	tune(clutchModel, clutchTune, neg, false);
-	    }
-	  }
-	  fp.close();
-	    
-	    
-	    for(int i = clutchLen + flatLen; i < clutchLen + flatLen + hoboLen; i++){
-	    	problem.y[i] = 0;
-	    }
-	    for(int i = clutchLen + flatLen + hoboLen; i < numPics; i++){
-	    	problem.y[i] = 1;
-	    }
-	    
-//	    svm_model pumpModel = null;//svm.svm_train(problem, param);
-	    fp = new DataOutputStream(new BufferedOutputStream(new FileOutputStream("PumpModelHistogramRBFAttempt2.csv")));
-	    for(int G = 1; G < 1000; G*= 10){
-	    	for(int C = 1; C < 101; C*= 10){
-		    	param.C = C;
-		    	param.gamma = ((double) G/(20000*numPics));
-		    	//param.gamma = gamma;
-		    	clutchModel = svm.svm_train(problem,param);
-		    	String str = "pumpModelRBFHistogramC="+C+"G="+param.gamma;
-		    	reportTuneData(clutchModel, str, fp);
-//		    	tune(clutchModel, clutchTune, neg, false);
-	    }
-	  }
-	  fp.close();
-	  
-	    
-	    
+	    classifyTestImages(clutchModel, flatModel, hoboModel, pumpModel, false);
+	 	       
 	}    
 	
 	private static float[] tune(svm_model model, File postiveDir, File[] negitiveDir, boolean isHistogram) throws IOException{
@@ -412,27 +284,91 @@ public class Main {
     		dos.writeBytes(str);
     	}
     	dos.flush();
+	}	
+	
+	public static void classifyTestImages(svm_model clutchModel, svm_model flatModel, svm_model hoboModel, svm_model pumpModel, boolean isHistogram) throws IOException{
+		BufferedImage img = null;
+		int correctClutch = 0;
+		int correctFlat = 0;
+		int correctHobo = 0;
+		int correctPump = 0;
+		for(File clutchImageFile : clutchTestDir.listFiles()){
+			img = ImageIO.read(clutchImageFile);
+			String classifier = classifyImage(clutchModel,flatModel,hoboModel,pumpModel,img,isHistogram);
+			if(classifier == "Clutch"){
+				correctClutch++;
+			}
+		}
+		System.out.println("Correctly Classified Clutch Bag Images " + correctClutch + " / " + clutchTestDir.listFiles().length);
+		
+		for(File flatImageFile : flatTestDir.listFiles()){
+			img = ImageIO.read(flatImageFile);
+			String classifier = classifyImage(clutchModel,flatModel,hoboModel,pumpModel,img,isHistogram);
+			if(classifier == "Flat"){
+				correctFlat++;
+			}
+		}
+		System.out.println("Correctly Classified Flat Shoe Images " + correctFlat + " / " + flatTestDir.listFiles().length);
+
+		for(File hoboImageFile : hoboTestDir.listFiles()){
+			img = ImageIO.read(hoboImageFile);
+			String classifier = classifyImage(clutchModel,flatModel,hoboModel,pumpModel,img,isHistogram);
+			if(classifier == "Hobo"){
+				correctHobo++;
+			}
+		}
+		System.out.println("Correctly Classified Hobo Bag Images " + correctHobo + " / " + hoboTestDir.listFiles().length);
+
+		for(File pumpImageFile : pumpTestDir.listFiles()){
+			img = ImageIO.read(pumpImageFile);
+			String classifier = classifyImage(clutchModel,flatModel,hoboModel,pumpModel,img,isHistogram);
+			if(classifier == "Pump"){
+				correctPump++;
+			}
+		}
+		System.out.println("Correctly Classified Clutch Images " + correctPump + " / " + pumpTestDir.listFiles().length);
+
+		int totalCorrect = correctClutch + correctFlat + correctHobo + correctPump;
+		int totalImages = clutchTestDir.listFiles().length + flatTestDir.listFiles().length + hoboTestDir.listFiles().length + pumpTestDir.listFiles().length;
+		System.out.println("Correctly Classifed Images " + totalCorrect + " / " + totalImages);
 	}
 	
-	public static int getMaxIdx(double a, double b, double c, double d){
-		if(a > b && a > c && a > d){
-			return 0;
-		}
-		else if(b > c && b > d){
-			return 1;
-		}
-		else if(c > d){
-			return 2;
+	public static String classifyImage(svm_model clutchModel, svm_model flatModel, svm_model hoboModel, svm_model pumpModel, BufferedImage img, boolean isHistogram){
+		svm_node[] nodes = null;
+		if(isHistogram){
+			float[] histogram = makeHistogram(img);
+			nodes = makeArrayOfNodes(histogram);
 		}
 		else{
-			return 3;
+			int[] vector = makeVector(img);
+			nodes = makeArrayOfNodes(vector);
 		}
+		double[] prob_estimates = new double[2];
+		svm.svm_predict_probability(clutchModel, nodes, prob_estimates);
+		double clutchProb = prob_estimates[1];
+		svm.svm_predict_probability(flatModel, nodes, prob_estimates);
+		double flatProb = prob_estimates[1];
+		svm.svm_predict_probability(hoboModel, nodes, prob_estimates);
+		double hoboProb = prob_estimates[1];
+		svm.svm_predict_probability(pumpModel, nodes, prob_estimates);
+		double pumpProb = prob_estimates[1];
+		if(clutchProb > flatProb & clutchProb > hoboProb & clutchProb > pumpProb){
+			return "Clutch";
+		}
+		else if(flatProb > hoboProb & flatProb > pumpProb){
+			return "Flat";
+		}
+		else if(hoboProb > pumpProb){
+			return "Hobo";
+		}
+		else{
+			return "Pump";
+		}
+		
+		
+		
+		
 	}
-	
-//	public static int tuneModel(svm_problem prob, svm_parameter param, File positiveDir, File[] negitiveDir){
-
-//	}
-	
 	
 	public static int getRed(int color){
 		return (color >>> 16) & 0xFF;
