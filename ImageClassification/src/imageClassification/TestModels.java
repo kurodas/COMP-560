@@ -231,14 +231,14 @@ public class TestModels {
 			}
 		}
 		}
-		System.out.println("Correctly Classified Clutch Images " + correctClutch + " / " + clutchTestLen);
-		System.out.println("Incorrectly Classified Clutch Images " + incorrectClutch + " / " + (flatTestLen + hoboTestLen + pumpTestLen));
-		System.out.println("Correctly Classified Flath Images " + correctFlat + " / " + flatTestLen);
-		System.out.println("Incorrectly Classified Flat Images " + incorrectFlat + " / " + (clutchTestLen + hoboTestLen + pumpTestLen));
-		System.out.println("Correctly Classified Hobo Images " + correctHobo + " / " + hoboTestLen);
-		System.out.println("Incorrectly Classified Hobo Images " + incorrectHobo + " / " + (flatTestLen + clutchTestLen + pumpTestLen));
-		System.out.println("Correctly Classified Pump Images " + correctPump + " / " + pumpTestLen);
-		System.out.println("Incorrectly Classified Pump Images " + incorrectPump + " / " + (flatTestLen + clutchTestLen + hoboTestLen));
+		System.out.println("Correctly Classified as Clutch Image " + correctClutch + " / " + clutchTestLen);
+		System.out.println("Incorrectly Classified as Clutch Image " + incorrectClutch + " / " + (flatTestLen + hoboTestLen + pumpTestLen));
+		System.out.println("Correctly Classified as Flat Image " + correctFlat + " / " + flatTestLen);
+		System.out.println("Incorrectly Classified as Flat Image " + incorrectFlat + " / " + (clutchTestLen + hoboTestLen + pumpTestLen));
+		System.out.println("Correctly Classified as Hobo Image " + correctHobo + " / " + hoboTestLen);
+		System.out.println("Incorrectly Classified as Hobo Image " + incorrectHobo + " / " + (flatTestLen + clutchTestLen + pumpTestLen));
+		System.out.println("Correctly Classified as Pump Image " + correctPump + " / " + pumpTestLen);
+		System.out.println("Incorrectly Classified as Pump Image " + incorrectPump + " / " + (flatTestLen + clutchTestLen + hoboTestLen));
 		
 		int totalCorrect = correctClutch + correctFlat + correctHobo + correctPump;
 		System.out.println("Correctly Classifed Images " + totalCorrect + " / " + (clutchTestLen+flatTestLen+hoboTestLen+pumpTestLen));

@@ -52,21 +52,31 @@ public class Main {
     
     
 	public static void main(String[] args) throws IOException{
+		svm.svm_set_print_string_function(new libsvm.svm_print_interface(){
+		    @Override public void print(String s) {} // Disables svm output
+		});
+		
 		int[] linearVectorCValues = {clutchLinearVectorC, flatLinearVectorC, hoboLinearVectorC, pumpLinearVectorC};
 		double[] zeroGammas = {0,0,0,0};
-//		System.out.println("Linear Vector");
-//		TestModels.test(linearVectorCValues, zeroGammas, svm_parameter.LINEAR, false);
+		
+		System.out.println("Results for Linear Kernel with Vector Representation");
+		TestModels.test(linearVectorCValues, zeroGammas, svm_parameter.LINEAR, false);
+		
 		int[] linearHistogramCValues = {clutchLinearHistogramC, flatLinearHistogramC, hoboLinearHistogramC, pumpLinearHistogramC};
-		System.out.println("Linear Histogram");
-//		TestModels.test(linearHistogramCValues, zeroGammas, svm_parameter.LINEAR, true);
-//		int[] RBFVectorCValues = {clutchRBFVectorC, flatRBFVectorC, hoboRBFVectorC, pumpRBFVectorC};
-//		double[] RBFVectorGammaValues = {clutchRBFVectorGamma, flatRBFVectorGamma, hoboRBFVectorGamma, pumpRBFVectorGamma};
-//		System.out.println("RBF Vector");
-//		TestModels.test(RBFVectorCValues, RBFVectorGammaValues, svm_parameter.RBF, false);
-//	
+		System.out.println("******************************************************************************");
+		System.out.println("Results for Linear Kernel with Histogram Representation");
+		TestModels.test(linearHistogramCValues, zeroGammas, svm_parameter.LINEAR, true);
+		
+		int[] RBFVectorCValues = {clutchRBFVectorC, flatRBFVectorC, hoboRBFVectorC, pumpRBFVectorC};
+		double[] RBFVectorGammaValues = {clutchRBFVectorGamma, flatRBFVectorGamma, hoboRBFVectorGamma, pumpRBFVectorGamma};
+		System.out.println("******************************************************************************");
+		System.out.println("Results for RBF Kernel with Vector Representation");
+		TestModels.test(RBFVectorCValues, RBFVectorGammaValues, svm_parameter.RBF, false);
+	
 		int[] RBFHistogramCValues = {clutchRBFHistogramC, flatRBFHistogramC, hoboRBFHistogramC, pumpRBFHistogramC};
 		double[] RBFHistogramGammaValues = {clutchRBFHistogramGamma, flatRBFHistogramGamma, hoboRBFHistogramGamma, pumpRBFHistogramGamma};
-		System.out.println("RBF Histogram");
+		System.out.println("******************************************************************************");
+		System.out.println("Results for RBF Kernel with Histogram Representation");
 		TestModels.test(RBFHistogramCValues, RBFHistogramGammaValues, svm_parameter.RBF, true);
 	
 		
@@ -98,6 +108,8 @@ public class Main {
 	    }
 	    return nodes;
 	}
+	
+	
 /*	
 	public static void reportTuneData(svm_model model, String modelName, DataOutputStream dos) throws IOException{
 		File pos = null;
